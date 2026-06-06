@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -311,7 +311,7 @@ export default function Dashboard() {
 
               {/* Macro info details */}
               <div className="space-y-3">
-                {chartData.map((macro, idx) => {
+                {chartData.map((macro) => {
                   const percentage = Math.round((macro.value * (macro.name === "Fat" ? 9 : 4) / calories) * 100);
                   return (
                     <div key={macro.name} className="flex justify-between items-center p-3 rounded-2xl bg-slate-50 border border-slate-100 hover:border-slate-200 transition-colors">
