@@ -12,7 +12,8 @@ import {
   TrendingUp, 
   Activity, 
   Compass, 
-  UtensilsCrossed 
+  UtensilsCrossed,
+  AlertCircle
 } from "lucide-react";
 
 export default function Onboarding() {
@@ -32,6 +33,7 @@ export default function Onboarding() {
   });
 
   const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState("");
 
   const handleInputChange = (field, value) => {
     setFormData({ ...formData, [field]: value });
@@ -64,11 +66,13 @@ export default function Onboarding() {
   };
 
   const handleSubmit = async () => {
+    setSubmitError("");
     try {
       await onboardUser(formData);
       navigate("/");
     } catch (e) {
       console.error("Error onboarding user:", e);
+      setSubmitError(e.message || "Failed to save onboarding data. Please check connection.");
     }
   };
 
@@ -104,6 +108,20 @@ export default function Onboarding() {
 
       {/* Main card panel */}
       <div className="w-full max-w-lg bg-white border border-slate-200 shadow-sm p-8 rounded-3xl border border-slate-200 shadow-2xl relative">
+        <AnimatePresence>
+          {submitError && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="flex items-center space-x-2 p-3 mb-6 rounded-xl bg-neon-red/10 border border-neon-red/20 text-neon-red text-xs font-semibold"
+            >
+              <AlertCircle className="h-4 w-4 shrink-0" />
+              <span>{submitError}</span>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
         <AnimatePresence mode="wait">
           {step === 1 && (
             <motion.div
