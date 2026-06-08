@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 
 export default function Onboarding() {
-  const { userProfile, onboardUser } = useAuth();
+  const { userProfile, onboardUser, logout } = useAuth();
   const navigate = useNavigate();
 
   const [step, setStep] = useState(1);
@@ -342,7 +342,13 @@ export default function Onboarding() {
               <span>Back</span>
             </button>
           ) : (
-            <div />
+            <button
+              onClick={logout}
+              className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-rose-50 border border-slate-200 text-rose-600 font-bold transition-all text-sm flex items-center"
+              title="Log Out"
+            >
+              <span>Log Out</span>
+            </button>
           )}
 
           {step < 3 ? (
