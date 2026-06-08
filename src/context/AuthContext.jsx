@@ -264,7 +264,7 @@ export function AuthProvider({ children }) {
     };
 
     if (isFirebaseConfigured && currentUser) {
-      await updateDoc(doc(db, "users", currentUser.uid), updatedProfile);
+      await setDoc(doc(db, "users", currentUser.uid), updatedProfile, { merge: true });
     } else {
       localStorage.setItem("gymchief_profile", JSON.stringify(updatedProfile));
       if (currentUser) {
@@ -294,7 +294,7 @@ export function AuthProvider({ children }) {
     }
 
     if (isFirebaseConfigured && currentUser) {
-      await updateDoc(doc(db, "users", currentUser.uid), newProfile);
+      await setDoc(doc(db, "users", currentUser.uid), newProfile, { merge: true });
     } else {
       localStorage.setItem("gymchief_profile", JSON.stringify(newProfile));
       if (currentUser) {

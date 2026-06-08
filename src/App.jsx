@@ -14,7 +14,7 @@ import WeeklyPlanner from './pages/WeeklyPlanner'
 function ProtectedRoute({ children }) {
   const { currentUser, userProfile } = useAuth()
   if (!currentUser) return <Navigate to="/auth" />
-  if (userProfile && !userProfile.onboarded) return <Navigate to="/onboarding" />
+  if (!userProfile || !userProfile.onboarded) return <Navigate to="/onboarding" />
   return children
 }
 
