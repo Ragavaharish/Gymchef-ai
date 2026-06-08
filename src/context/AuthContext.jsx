@@ -17,6 +17,13 @@ export function useAuth() {
   return useContext(AuthContext);
 }
 
+const withTimeout = (promise, timeoutMs = 4000, errorMsg = "Database connection timed out.") => {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error(errorMsg)), timeoutMs))
+  ]);
+};
+
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [userProfile, setUserProfile] = useState(null);
@@ -31,12 +38,11 @@ export function AuthProvider({ children }) {
           // Fetch user profile from Firestore with timeout to prevent loading hang
           try {
             const userDocRef = doc(db, "users", user.uid);
-            const docSnap = await Promise.race([
+            const docSnap = await withTimeout(
               getDoc(userDocRef),
-              new Promise((_, reject) => 
-                setTimeout(() => reject(new Error("Firestore connection timed out. Please check if Firestore is created in your Firebase Console.")), 4000)
-              )
-            ]);
+              4000,
+              "Firestore connection timed out. Please check if Firestore is created in your Firebase Console."
+            );
             if (docSnap.exists()) {
               setUserProfile(docSnap.data());
             } else {
@@ -78,7 +84,11 @@ export function AuthProvider({ children }) {
         onboarded: false,
         createdAt: new Date().toISOString()
       };
-      await setDoc(doc(db, "users", res.user.uid), profile);
+      await withTimeout(
+        setDoc(doc(db, "users", res.user.uid), profile),
+        4000,
+        "Failed to create user profile in Firestore. Database connection timed out."
+      );
       setUserProfile(profile);
       return res.user;
     } else {
@@ -110,7 +120,11 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     if (isFirebaseConfigured) {
       const res = await signInWithEmailAndPassword(auth, email, password);
-      const userDoc = await getDoc(doc(db, "users", res.user.uid));
+      const userDoc = await withTimeout(
+        getDoc(doc(db, "users", res.user.uid)),
+        4000,
+        "Failed to load user profile. Database connection timed out."
+      );
       if (userDoc.exists()) {
         setUserProfile(userDoc.data());
       }
@@ -167,7 +181,11 @@ export function AuthProvider({ children }) {
     if (isFirebaseConfigured) {
       const res = await signInWithPopup(auth, googleProvider);
       const userDocRef = doc(db, "users", res.user.uid);
-      const userDoc = await getDoc(userDocRef);
+      const userDoc = await withTimeout(
+        getDoc(userDocRef),
+        4000,
+        "Failed to load user profile. Database connection timed out."
+      );
       if (!userDoc.exists()) {
         const profile = {
           uid: res.user.uid,
@@ -176,7 +194,11 @@ export function AuthProvider({ children }) {
           onboarded: false,
           createdAt: new Date().toISOString()
         };
-        await setDoc(userDocRef, profile);
+        await withTimeout(
+          setDoc(userDocRef, profile),
+          4000,
+          "Failed to save Google user profile in Firestore. Database connection timed out."
+        );
         setUserProfile(profile);
       } else {
         setUserProfile(userDoc.data());
@@ -270,7 +292,11 @@ export function AuthProvider({ children }) {
     };
 
     if (isFirebaseConfigured && currentUser) {
-      await setDoc(doc(db, "users", currentUser.uid), updatedProfile, { merge: true });
+      await withTimeout(
+        setDoc(doc(db, "users", currentUser.uid), updatedProfile, { merge: true }),
+        4000,
+        "Failed to save onboarding targets to Firestore. Database connection timed out."
+      );
     } else {
       localStorage.setItem("gymchief_profile", JSON.stringify(updatedProfile));
       if (currentUser) {
@@ -300,7 +326,11 @@ export function AuthProvider({ children }) {
     }
 
     if (isFirebaseConfigured && currentUser) {
-      await setDoc(doc(db, "users", currentUser.uid), newProfile, { merge: true });
+      await withTimeout(
+        setDoc(doc(db, "users", currentUser.uid), newProfile, { merge: true }),
+        4000,
+        "Failed to update profile statistics in Firestore. Database connection timed out."
+      );
     } else {
       localStorage.setItem("gymchief_profile", JSON.stringify(newProfile));
       if (currentUser) {
