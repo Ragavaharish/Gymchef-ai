@@ -28,10 +28,15 @@ export function AuthProvider({ children }) {
       const unsubscribe = onAuthStateChanged(auth, async (user) => {
         setCurrentUser(user);
         if (user) {
-          // Fetch user profile from Firestore
+          // Fetch user profile from Firestore with timeout to prevent loading hang
           try {
             const userDocRef = doc(db, "users", user.uid);
-            const docSnap = await getDoc(userDocRef);
+            const docSnap = await Promise.race([
+              getDoc(userDocRef),
+              new Promise((_, reject) => 
+                setTimeout(() => reject(new Error("Firestore connection timed out. Please check if Firestore is created in your Firebase Console.")), 4000)
+              )
+            ]);
             if (docSnap.exists()) {
               setUserProfile(docSnap.data());
             } else {
@@ -39,6 +44,7 @@ export function AuthProvider({ children }) {
             }
           } catch (e) {
             console.error("Error fetching user profile:", e);
+            setUserProfile(null);
           }
         } else {
           setUserProfile(null);
