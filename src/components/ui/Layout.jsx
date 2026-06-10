@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { 
   Dumbbell, 
-  User, 
   LogOut, 
   MessageSquare, 
   ChefHat, 
@@ -12,15 +11,14 @@ import {
   Calendar, 
   LayoutDashboard,
   Menu,
-  X
+  X,
+  User
 } from "lucide-react";
 
 export default function Layout({ children }) {
   const { currentUser, userProfile, logout } = useAuth();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  if (!currentUser) return <div className="min-h-screen bg-slate-50">{children}</div>;
 
   const navigation = [
     { name: "Dashboard", href: "/", icon: LayoutDashboard },
@@ -34,9 +32,9 @@ export default function Layout({ children }) {
   const isActive = (path) => location.pathname === path;
 
   const getGoalBadgeColor = (goal) => {
-    if (goal === "muscle_gain") return "bg-neon-lime/10 text-slate-900 border-neon-lime/30";
-    if (goal === "fat_loss") return "bg-slate-900 text-white border-slate-800";
-    return "bg-slate-200 text-slate-800 border-slate-300";
+    if (goal === "muscle_gain") return "bg-[#00a699]/20 text-[#00a699] border-[#00a699]/30";
+    if (goal === "fat_loss") return "bg-[#e65c5c]/20 text-[#e65c5c] border-[#e65c5c]/30";
+    return "bg-slate-800 text-slate-300 border-slate-700";
   };
 
   const getGoalLabel = (goal) => {
@@ -47,83 +45,32 @@ export default function Layout({ children }) {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
-      {/* Header */}
-      <header className="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200 py-4 px-4 sm:px-8 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="p-2 bg-slate-900 rounded-xl border border-slate-800 shadow-sm">
-            <Dumbbell className="h-6 w-6 text-neon-lime" />
-          </div>
-          <span className="text-xl font-bold tracking-tight text-slate-900 flex items-center space-x-1">
-            <span>GymMeal</span>
-            <span className="text-slate-400 font-extrabold">Planner</span>
-          </span>
-        </div>
-
-        {/* Desktop Nav */}
-        <nav className="hidden lg:flex items-center space-x-1">
-          {navigation.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300 ${
-                  active 
-                    ? "bg-slate-100 text-slate-900 border border-slate-200 shadow-sm" 
-                    : "text-slate-500 hover:text-slate-900 hover:bg-slate-50 border border-transparent"
-                }`}
-              >
-                <Icon className="h-4 w-4" />
-                <span>{item.name}</span>
-              </Link>
-            );
-          })}
-        </nav>
-
-        {/* Profile / Stats */}
-        <div className="hidden lg:flex items-center space-x-4">
-          {userProfile && userProfile.onboarded && (
-            <div className={`px-3 py-1 rounded-full text-xs font-bold border ${getGoalBadgeColor(userProfile.fitnessGoal)}`}>
-              {getGoalLabel(userProfile.fitnessGoal)}
-            </div>
-          )}
-          
-          <div className="flex items-center space-x-3 border-l border-slate-200 pl-4">
-            <div className="flex flex-col text-right">
-              <span className="text-sm font-bold text-slate-900">{userProfile?.name || "Lifter"}</span>
-              <span className="text-xs text-slate-500">{userProfile?.weight ? `${userProfile.weight} kg` : ""}</span>
-            </div>
-            <button 
-              onClick={logout} 
-              className="p-2 rounded-lg bg-slate-100 hover:bg-slate-900 text-slate-500 hover:text-white border border-slate-200 hover:border-slate-800 transition-all duration-300 shadow-sm"
-              title="Logout"
-            >
-              <LogOut className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu button */}
-        <div className="lg:hidden flex items-center space-x-3">
-          {userProfile && userProfile.onboarded && (
-            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${getGoalBadgeColor(userProfile.fitnessGoal)}`}>
-              {userProfile.fitnessGoal === "muscle_gain" ? "Gain" : userProfile.fitnessGoal === "fat_loss" ? "Loss" : "Maint"}
-            </span>
-          )}
+      {/* ─── Global Header (Dark Theme inspired by PureGym) ─── */}
+      <header className="sticky top-0 z-40 bg-[#111111] border-b border-slate-800 py-4 px-4 sm:px-8 flex items-center justify-between shadow-md rounded-b-2xl md:rounded-b-3xl">
+        
+        {/* Left Side: Brand / Hamburger toggler */}
+        <div className="flex items-center space-x-4">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-900"
+            className="lg:hidden p-2 rounded-lg bg-slate-900 border border-slate-800 text-white hover:bg-slate-800 transition-colors"
           >
-            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
+          
+          <Link to="/" className="flex items-center space-x-2.5">
+            <div className="p-2.5 bg-[#00a699] rounded-xl shadow-inner">
+              <Dumbbell className="h-5 w-5 text-white" />
+            </div>
+            <span className="text-lg font-black tracking-tight text-white flex items-center space-x-0.5">
+              <span>GYMCHIEF</span>
+              <span className="text-[#00a699]">AI</span>
+            </span>
+          </Link>
         </div>
-      </header>
 
-      {/* Mobile Drawer */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[73px] z-30 bg-white/95 backdrop-blur-lg flex flex-col p-6 space-y-4 border-t border-slate-200">
-          <nav className="flex flex-col space-y-2">
+        {/* Center: Navigation Links (only for logged in users) */}
+        {currentUser && (
+          <nav className="hidden lg:flex items-center space-x-1">
             {navigation.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.href);
@@ -131,53 +78,130 @@ export default function Layout({ children }) {
                 <Link
                   key={item.name}
                   to={item.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-base font-bold transition-all ${
+                  className={`flex items-center space-x-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-300 ${
                     active 
-                      ? "bg-slate-900 text-neon-lime border border-slate-800 shadow-md" 
-                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                      ? "bg-slate-900 text-[#00a699] border border-slate-800 shadow-sm" 
+                      : "text-slate-400 hover:text-white hover:bg-slate-900 border border-transparent"
                   }`}
                 >
-                  <Icon className="h-5 w-5" />
+                  <Icon className="h-4 w-4" />
                   <span>{item.name}</span>
                 </Link>
               );
             })}
           </nav>
-          
-          <div className="mt-auto border-t border-slate-200 pt-6 flex flex-col space-y-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-slate-900 font-bold">{userProfile?.name || "Lifter"}</p>
-                <p className="text-xs text-slate-500">{userProfile?.email}</p>
-              </div>
-              {userProfile?.weight && (
-                <p className="text-sm font-bold text-slate-900">{userProfile.weight} kg</p>
+        )}
+
+        {/* Right Side Actions */}
+        <div className="flex items-center space-x-4">
+          {currentUser ? (
+            <>
+              {/* Authenticated State */}
+              {userProfile && userProfile.onboarded && (
+                <div className={`hidden sm:inline-flex px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider border ${getGoalBadgeColor(userProfile.fitnessGoal)}`}>
+                  {getGoalLabel(userProfile.fitnessGoal)}
+                </div>
               )}
-            </div>
-            <button
-              onClick={() => {
-                setMobileMenuOpen(false);
-                logout();
-              }}
-              className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl bg-slate-100 border border-slate-200 text-slate-900 hover:bg-slate-900 hover:text-white transition-all font-bold shadow-sm"
+              
+              <div className="flex items-center space-x-3 border-l border-slate-800 pl-4">
+                <div className="hidden sm:flex flex-col text-right">
+                  <span className="text-xs font-bold text-white uppercase">{userProfile?.name || "Lifter"}</span>
+                  <span className="text-[10px] text-slate-400 font-semibold">{userProfile?.weight ? `${userProfile.weight} kg` : ""}</span>
+                </div>
+                <button 
+                  onClick={logout} 
+                  className="p-2.5 rounded-xl bg-slate-900 hover:bg-[#e65c5c]/10 text-slate-400 hover:text-[#e65c5c] border border-slate-800 hover:border-[#e65c5c]/30 transition-all duration-300 shadow-sm"
+                  title="Logout"
+                >
+                  <LogOut className="h-4 w-4" />
+                </button>
+              </div>
+            </>
+          ) : (
+            /* Public Pre-Login State */
+            <Link
+              to="/auth"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#00a699] hover:bg-[#008c81] text-white font-extrabold text-xs uppercase tracking-wider transition-all duration-300 shadow-md shadow-[#00a699]/15"
             >
-              <LogOut className="h-4 w-4" />
-              <span>Log Out</span>
-            </button>
-          </div>
+              <User className="h-3.5 w-3.5" />
+              <span>Log In</span>
+            </Link>
+          )}
+        </div>
+      </header>
+
+      {/* ─── Mobile Navigation Drawer ─── */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 top-[73px] z-30 bg-[#111111]/98 backdrop-blur-lg flex flex-col p-6 space-y-4 border-t border-slate-800">
+          <nav className="flex flex-col space-y-2">
+            {currentUser ? (
+              navigation.map((item) => {
+                const Icon = item.icon;
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider transition-all ${
+                      active 
+                        ? "bg-slate-900 text-[#00a699] border border-slate-800 shadow" 
+                        : "text-slate-400 hover:text-white hover:bg-slate-900"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" />
+                    <span>{item.name}</span>
+                  </Link>
+                );
+              })
+            ) : (
+              <Link
+                to="/auth"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-bold uppercase tracking-wider text-slate-400 hover:text-white hover:bg-slate-900"
+              >
+                <User className="h-5 w-5" />
+                <span>Log In / Sign Up</span>
+              </Link>
+            )}
+          </nav>
+          
+          {currentUser && (
+            <div className="mt-auto border-t border-slate-800 pt-6 flex flex-col space-y-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-white text-xs font-bold uppercase tracking-wider">{userProfile?.name || "Lifter"}</p>
+                  <p className="text-[10px] text-slate-400">{userProfile?.email}</p>
+                </div>
+                {userProfile?.weight && (
+                  <p className="text-sm font-black text-[#00a699]">{userProfile.weight} kg</p>
+                )}
+              </div>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  logout();
+                }}
+                className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:bg-[#e65c5c] hover:text-white hover:border-[#e65c5c] transition-all font-extrabold text-xs uppercase tracking-wider shadow"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Log Out</span>
+              </button>
+            </div>
+          )}
         </div>
       )}
 
-      {/* Main Container */}
+      {/* ─── Main Content Container ─── */}
       <main className="flex-1 w-full mx-auto flex flex-col">
         {children}
       </main>
 
-      {/* Footer */}
-      <footer className="py-8 bg-slate-900 border-t border-slate-800 text-center text-sm text-slate-400">
-        <p>© 2026 Gym Meal Planner. Built for elite performance & smart nutrition.</p>
+      {/* ─── Footer ─── */}
+      <footer className="py-10 bg-[#111111] border-t border-slate-800 text-center text-xs text-slate-500">
+        <p className="font-semibold tracking-wider">© 2026 GYMCHIEF AI. BUILT FOR ELITE PERFORMANCE & SMART NUTRITION.</p>
       </footer>
     </div>
   );
 }
+

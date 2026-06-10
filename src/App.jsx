@@ -10,6 +10,7 @@ import Recipes from './pages/Recipes'
 import ShakeBuilder from './pages/ShakeBuilder'
 import FoodScanner from './pages/FoodScanner'
 import WeeklyPlanner from './pages/WeeklyPlanner'
+import LandingPage from './pages/LandingPage'
 
 function ProtectedRoute({ children }) {
   const { currentUser, userProfile } = useAuth()
@@ -30,7 +31,15 @@ export default function App() {
         !currentUser ? <Navigate to="/auth" /> : <Onboarding />
       } />
       <Route path="/" element={
-        <ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>
+        currentUser ? (
+          !userProfile || !userProfile.onboarded ? (
+            <Navigate to="/onboarding" />
+          ) : (
+            <Layout><Dashboard /></Layout>
+          )
+        ) : (
+          <Layout><LandingPage /></Layout>
+        )
       } />
       <Route path="/coach" element={
         <ProtectedRoute><Layout><Coach /></Layout></ProtectedRoute>

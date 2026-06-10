@@ -152,25 +152,19 @@ export default function Dashboard() {
 
   return (
     <div className="relative min-h-screen bg-slate-50 pb-20">
-      {/* Background patterns */}
-      <div className="absolute top-0 inset-x-0 h-64 bg-gradient-to-b from-slate-900 to-slate-900/0 -z-10 pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
-
-        {/* Welcome Banner - Premium Dark Card */}
-        <div className="relative bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-xl overflow-hidden mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          {/* Neon Glow decoration */}
-          <div className="absolute top-0 right-0 w-[200px] h-[200px] bg-neon-lime/10 rounded-full blur-[80px] pointer-events-none" />
-          <div className="absolute -left-10 -bottom-10 w-[150px] h-[150px] bg-sky-500/5 rounded-full blur-[60px] pointer-events-none" />
-
-          <div className="relative z-10">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-neon-lime/10 border border-neon-lime/20 text-neon-lime text-xs font-bold uppercase tracking-wider mb-3">
-              <Sparkles className="h-3.5 w-3.5" /> Personalized Dashboard
-            </span>
-            <h1 className="text-3xl font-black text-white sm:text-4xl tracking-tight leading-tight">
-              Welcome back, <span className="text-neon-lime">{userProfile.name}</span>! 👋
+        {/* ─── Header (Left-aligned Welcome Frame matching mockup) ─── */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-slate-200/60">
+          <div className="space-y-3">
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 text-[#00a699] text-xs font-bold uppercase tracking-wider">
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Personalized Dashboard</span>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+              Welcome back, {userProfile.name || "ragava"}! 👋
             </h1>
-            <p className="text-slate-400 text-sm mt-2 font-medium">
+            <p className="text-slate-400 text-xs md:text-sm font-semibold tracking-wide">
               Your customized fitness profile is synchronized and up-to-date.
             </p>
           </div>
@@ -189,9 +183,9 @@ export default function Dashboard() {
               });
               setIsEditOpen(true);
             }}
-            className="relative z-10 flex items-center gap-2 px-6 py-3 bg-neon-lime hover:bg-[#b8e600] text-black font-extrabold rounded-xl transition-all duration-300 shadow-lg shadow-neon-lime/10 hover:shadow-neon-lime/20 text-sm self-start md:self-auto shrink-0"
+            className="flex items-center gap-2 px-6 py-3 bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#00a699]/30 text-slate-700 hover:text-[#00a699] font-extrabold rounded-2xl transition-all duration-300 shadow-sm text-xs uppercase tracking-wider shrink-0"
           >
-            <Edit3 className="h-4 w-4" />
+            <Edit3 className="h-4 w-4 text-[#00a699]" />
             <span>Update Fitness Stats</span>
           </button>
         </div>
@@ -220,7 +214,7 @@ export default function Dashboard() {
 
           {/* Protein Target */}
           <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow relative overflow-hidden group">
-            <div className="absolute top-0 left-0 w-2 h-full bg-lime-500" />
+            <div className="absolute top-0 left-0 w-2 h-full bg-[#00a699]" />
             <div className="flex justify-between items-start">
               <div>
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Protein Target</p>
@@ -231,8 +225,8 @@ export default function Dashboard() {
                   Daily protein target to preserve and build lean muscle.
                 </p>
               </div>
-              <div className="p-3 bg-lime-50 rounded-2xl border border-lime-100">
-                <Dumbbell className="h-6 w-6 text-lime-500 group-hover:scale-110 transition-transform animate-pulse" />
+              <div className="p-3 bg-teal-50 rounded-2xl border border-teal-100">
+                <Dumbbell className="h-6 w-6 text-[#00a699] group-hover:scale-110 transition-transform animate-pulse" />
               </div>
             </div>
           </div>
@@ -329,19 +323,40 @@ export default function Dashboard() {
               </div>
             </div>
 
-            <div className="text-center bg-lime-500/10 border border-lime-500/20 text-lime-800 text-xs p-2.5 rounded-xl font-medium">
+            <div className="text-center bg-[#00a699]/10 border border-[#00a699]/20 text-[#008c81] text-xs p-2.5 rounded-xl font-medium">
               💡 Tip: Maintain your macro balance ratio to optimize lean growth and fat burn efficiency.
             </div>
           </div>
 
           {/* User Profile Stats */}
           <div className="bg-white border border-slate-200 p-6 rounded-3xl shadow-sm flex flex-col justify-between">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <User className="h-5 w-5 text-lime-500" />
-                <span>Body Composition Stats</span>
-              </h3>
-              <p className="text-xs text-slate-500 mt-0.5">Physical dimensions used in equations.</p>
+            <div className="flex justify-between items-start">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
+                  <User className="h-5 w-5 text-[#00a699]" />
+                  <span>Body Composition Stats</span>
+                </h3>
+                <p className="text-xs text-slate-500 mt-0.5">Physical dimensions used in equations.</p>
+              </div>
+              <button
+                onClick={() => {
+                  setFormData({
+                    name: userProfile.name || "",
+                    age: userProfile.age || "",
+                    weight: userProfile.weight || "",
+                    height: userProfile.height || "",
+                    gender: userProfile.gender || "male",
+                    activityLevel: userProfile.activityLevel || "moderately_active",
+                    fitnessGoal: userProfile.fitnessGoal || "muscle_gain",
+                    dietaryPreference: userProfile.dietaryPreference || "non-veg"
+                  });
+                  setIsEditOpen(true);
+                }}
+                className="p-2 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 text-slate-500 hover:text-[#00a699] transition-all"
+                title="Update Stats"
+              >
+                <Edit3 className="h-4 w-4" />
+              </button>
             </div>
 
             <div className="my-6 space-y-3.5">
@@ -404,12 +419,12 @@ export default function Dashboard() {
                 <Link
                   key={action.title}
                   to={action.href}
-                  className="flex flex-col p-5 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl hover:border-lime-500/30 transition-all duration-300 group"
+                  className="flex flex-col p-5 bg-white border border-slate-200 rounded-3xl shadow-sm hover:shadow-xl hover:border-[#00a699]/30 transition-all duration-300 group"
                 >
                   <div className={`p-3 rounded-2xl border w-fit ${action.color.split(" ")[0]} ${action.color.split(" ")[2]}`}>
                     <IconComponent className="h-5 w-5" />
                   </div>
-                  <h4 className="text-sm font-bold text-slate-900 mt-4 group-hover:text-lime-600 transition-colors flex items-center justify-between">
+                  <h4 className="text-sm font-bold text-slate-900 mt-4 group-hover:text-[#00a699] transition-colors flex items-center justify-between">
                     <span>{action.title}</span>
                     <ChevronRight className="h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
                   </h4>
@@ -453,7 +468,7 @@ export default function Dashboard() {
 
               <div className="mb-6">
                 <h3 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                  <Edit3 className="h-5 w-5 text-lime-500" />
+                  <Edit3 className="h-5 w-5 text-[#00a699]" />
                   <span>Update Fitness Parameters</span>
                 </h3>
                 <p className="text-xs text-slate-500 mt-1">
@@ -481,7 +496,7 @@ export default function Dashboard() {
                     required
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                   />
                 </div>
 
@@ -493,7 +508,7 @@ export default function Dashboard() {
                       required
                       value={formData.age}
                       onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     />
                   </div>
 
@@ -502,10 +517,10 @@ export default function Dashboard() {
                     <select
                       value={formData.gender}
                       onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     >
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="male" className="bg-white text-slate-900">Male</option>
+                      <option value="female" className="bg-white text-slate-900">Female</option>
                     </select>
                   </div>
                 </div>
@@ -518,7 +533,7 @@ export default function Dashboard() {
                       required
                       value={formData.weight}
                       onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     />
                   </div>
 
@@ -529,7 +544,7 @@ export default function Dashboard() {
                       required
                       value={formData.height}
                       onChange={(e) => setFormData({ ...formData, height: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     />
                   </div>
                 </div>
@@ -539,13 +554,13 @@ export default function Dashboard() {
                   <select
                     value={formData.activityLevel}
                     onChange={(e) => setFormData({ ...formData, activityLevel: e.target.value })}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                   >
-                    <option value="sedentary">Sedentary ( desk job, little exercise )</option>
-                    <option value="lightly_active">Lightly Active ( gym 1-3 days/week )</option>
-                    <option value="moderately_active">Moderately Active ( gym 3-5 days/week )</option>
-                    <option value="very_active">Very Active ( hard training 6-7 days/week )</option>
-                    <option value="extra_active">Extra Active ( active athletic/labor job )</option>
+                    <option value="sedentary" className="bg-white text-slate-900">Sedentary ( desk job, little exercise )</option>
+                    <option value="lightly_active" className="bg-white text-slate-900">Lightly Active ( gym 1-3 days/week )</option>
+                    <option value="moderately_active" className="bg-white text-slate-900">Moderately Active ( gym 3-5 days/week )</option>
+                    <option value="very_active" className="bg-white text-slate-900">Very Active ( hard training 6-7 days/week )</option>
+                    <option value="extra_active" className="bg-white text-slate-900">Extra Active ( active athletic/labor job )</option>
                   </select>
                 </div>
 
@@ -555,23 +570,24 @@ export default function Dashboard() {
                     <select
                       value={formData.fitnessGoal}
                       onChange={(e) => setFormData({ ...formData, fitnessGoal: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     >
-                      <option value="muscle_gain">Muscle Gain</option>
-                      <option value="fat_loss">Fat Loss</option>
-                      <option value="maintenance">Maintenance</option>
+                      <option value="muscle_gain" className="bg-white text-slate-900">Muscle Gain</option>
+                      <option value="fat_loss" className="bg-white text-slate-900">Fat Loss</option>
+                      <option value="maintenance" className="bg-white text-slate-900">Maintenance</option>
                     </select>
                   </div>
-
+ 
                   <div className="space-y-1.5">
                     <label className="text-xs font-bold uppercase tracking-wider text-slate-500">Diet Preference</label>
                     <select
                       value={formData.dietaryPreference}
                       onChange={(e) => setFormData({ ...formData, dietaryPreference: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-lime-500 rounded-xl py-3 px-4 text-sm outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm outline-none transition-all"
                     >
-                      <option value="veg">Vegetarian</option>
-                      <option value="non-veg">Non-Vegetarian</option>
+                      <option value="any" className="bg-white text-slate-900">Both (Veg & Non-Veg)</option>
+                      <option value="veg" className="bg-white text-slate-900">Vegetarian</option>
+                      <option value="non-veg" className="bg-white text-slate-900">Non-Vegetarian</option>
                     </select>
                   </div>
                 </div>
@@ -586,7 +602,7 @@ export default function Dashboard() {
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2.5 rounded-xl bg-lime-400 text-slate-900 hover:bg-lime-500 font-bold transition-all shadow-md shadow-lime-400/10 text-sm"
+                    className="px-5 py-2.5 rounded-xl bg-[#e65c5c] text-white hover:bg-[#d54b4b] font-bold transition-all shadow-md shadow-[#e65c5c]/10 text-sm"
                   >
                     Save Changes
                   </button>

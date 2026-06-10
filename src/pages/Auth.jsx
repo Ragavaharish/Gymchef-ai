@@ -31,10 +31,10 @@ export default function Auth() {
         setMessage("Password reset link sent to your email!");
         setTimeout(() => setIsForgot(false), 3000);
       } else if (isLogin) {
-        const user = await login(email, password);
+        await login(email, password);
         navigate("/");
       } else {
-        const user = await signup(email, password, name);
+        await signup(email, password, name);
         navigate("/");
       }
     } catch (err) {
@@ -60,32 +60,32 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Dynamic background circles */}
-      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-neon-lime/5 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[300px] h-[300px] bg-neon-red/5 rounded-full blur-[100px] pointer-events-none" />
+    <div className="min-h-screen bg-[#0d0d0d] flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Premium background radial highlights */}
+      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-[#00a699]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#e65c5c]/5 rounded-full blur-[100px] pointer-events-none" />
 
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-md bg-white border border-slate-200 shadow-sm p-8 rounded-3xl border border-slate-200 shadow-2xl relative z-10"
+        className="w-full max-w-md bg-white border border-slate-200 shadow-2xl p-8 rounded-3xl relative z-10"
       >
         {/* Branding header */}
         <div className="flex flex-col items-center mb-8">
-          <div className="p-3 bg-neon-lime/10 rounded-2xl border border-neon-lime/20 mb-3 glow-green">
-            <Dumbbell className="h-8 w-8 text-neon-lime" />
+          <div className="p-3 bg-[#00a699]/10 rounded-2xl border border-[#00a699]/20 mb-3 shadow-inner">
+            <Dumbbell className="h-8 w-8 text-[#00a699]" />
           </div>
-          <h2 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center space-x-1">
-            <span>GymChief</span>
-            <span className="text-neon-lime font-extrabold">AI</span>
+          <h2 className="text-2xl font-black tracking-tight text-slate-900 flex items-center space-x-0.5">
+            <span>GYMCHIEF</span>
+            <span className="text-[#00a699]">AI</span>
           </h2>
-          <p className="text-sm text-slate-500 mt-1 text-center">
+          <p className="text-xs text-slate-500 mt-2 text-center font-medium">
             {isForgot 
-              ? "Recover your nutrition account" 
+              ? "Recover your nutrition account parameters" 
               : isLogin 
-                ? "Fuel your potential. Sign in to your dashboard." 
-                : "Join the elite. Calculate macros & build muscle."}
+                ? "Fuel your potential. Sign in to your AI dashboard." 
+                : "Join the elite. Compute macro budgets & log meals."}
           </p>
         </div>
 
@@ -96,7 +96,7 @@ export default function Auth() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="flex items-center space-x-2 p-3 mb-4 rounded-xl bg-neon-red/10 border border-neon-red/20 text-neon-red text-xs"
+              className="flex items-center space-x-2 p-3 mb-4 rounded-xl bg-rose-50 border border-rose-100 text-[#e65c5c] text-xs font-semibold"
             >
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{error}</span>
@@ -108,7 +108,7 @@ export default function Auth() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="flex items-center space-x-2 p-3 mb-4 rounded-xl bg-neon-lime/10 border border-neon-lime/20 text-neon-lime text-xs"
+              className="flex items-center space-x-2 p-3 mb-4 rounded-xl bg-emerald-50 border border-emerald-100 text-[#00a699] text-xs font-semibold"
             >
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{message}</span>
@@ -126,16 +126,16 @@ export default function Auth() {
                 transition={{ duration: 0.3 }}
                 className="space-y-1.5"
               >
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 pl-1">Full Name</label>
+                <label className="text-xs font-black uppercase tracking-wider text-slate-400 pl-1">Full Name</label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3.5 h-4 w-4 text-slate-500" />
+                  <User className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                   <input
                     type="text"
                     required
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] focus:bg-white rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                   />
                 </div>
               </motion.div>
@@ -143,16 +143,16 @@ export default function Auth() {
           </AnimatePresence>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 pl-1">Email Address</label>
+            <label className="text-xs font-black uppercase tracking-wider text-slate-400 pl-1">Email Address</label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-500" />
+              <Mail className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
               <input
                 type="email"
                 required
-                placeholder="you@example.com"
+                placeholder="Enter your email id"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] focus:bg-white rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
               />
             </div>
           </div>
@@ -160,26 +160,26 @@ export default function Auth() {
           {!isForgot && (
             <div className="space-y-1.5">
               <div className="flex justify-between items-center px-1">
-                <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">Password</label>
+                <label className="text-xs font-black uppercase tracking-wider text-slate-400">Password</label>
                 {isLogin && (
                   <button 
                     type="button"
                     onClick={() => setIsForgot(true)}
-                    className="text-xs text-neon-lime hover:underline"
+                    className="text-xs font-bold text-[#00a699] hover:underline"
                   >
                     Forgot Password?
                   </button>
                 )}
               </div>
               <div className="relative">
-                <Lock className="absolute left-3 top-3.5 h-4 w-4 text-slate-500" />
+                <Lock className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                 <input
                   type="password"
                   required
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] focus:bg-white rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                 />
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function Auth() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-neon-lime hover:bg-neon-lime/90 text-black font-semibold rounded-xl flex items-center justify-center space-x-2 transition-all duration-300 font-sans shadow-lg shadow-neon-lime/20 disabled:opacity-50"
+            className="w-full py-3.5 bg-[#e65c5c] hover:bg-[#d54b4b] text-white font-black rounded-xl flex items-center justify-center space-x-2 transition-all duration-300 uppercase tracking-widest text-xs shadow-md shadow-[#e65c5c]/10 disabled:opacity-50"
           >
             <span>{loading ? "Processing..." : isForgot ? "Send Reset Email" : isLogin ? "Sign In" : "Create Account"}</span>
             {!loading && <ArrowRight className="h-4 w-4" />}
@@ -198,9 +198,9 @@ export default function Auth() {
         {!isForgot && (
           <div className="relative my-6 text-center">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200"></div>
+              <div className="w-full border-t border-slate-100"></div>
             </div>
-            <span className="relative bg-[#121212] px-3 text-xs text-slate-500 uppercase tracking-wider">or</span>
+            <span className="relative bg-white px-3 text-[10px] text-slate-400 font-bold uppercase tracking-widest">or</span>
           </div>
         )}
 
@@ -208,7 +208,7 @@ export default function Auth() {
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-900 border border-slate-200 hover:border-slate-300 font-semibold rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 disabled:opacity-50"
+            className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 font-bold rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 disabled:opacity-50 text-xs uppercase tracking-wider shadow"
           >
             <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" width="24" height="24">
               <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.67 1.54 15.02 1 12 1 7.24 1 3.2 3.73 1.24 7.7l3.87 3C6.03 7.82 8.79 5.04 12 5.04z"/>
@@ -224,19 +224,19 @@ export default function Auth() {
           {isForgot ? (
             <button 
               onClick={() => setIsForgot(false)}
-              className="text-sm text-neon-lime hover:underline"
+              className="text-xs font-bold text-[#00a699] hover:underline uppercase tracking-wider"
             >
               Back to Sign In
             </button>
           ) : (
             <button
               onClick={() => setIsLogin(!isLogin)}
-              className="text-sm text-slate-500 hover:text-slate-900 transition-colors"
+              className="text-xs font-semibold text-slate-500 hover:text-slate-900 transition-colors"
             >
               {isLogin ? (
-                <span>Don't have an account? <strong className="text-neon-lime hover:underline">Sign up</strong></span>
+                <span>Don't have an account? <strong className="text-[#00a699] font-bold hover:underline">Sign up</strong></span>
               ) : (
-                <span>Already have an account? <strong className="text-neon-lime hover:underline">Sign in</strong></span>
+                <span>Already have an account? <strong className="text-[#00a699] font-bold hover:underline">Sign in</strong></span>
               )}
             </button>
           )}

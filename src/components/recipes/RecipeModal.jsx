@@ -33,7 +33,7 @@ export default function RecipeModal({ recipe, onClose }) {
   if (!recipe) return null;
 
   const macroItems = [
-    { label: "Protein", value: `${recipe.macros.protein}g`, icon: Beef, color: "text-neon-lime", bg: "bg-neon-lime/10", border: "border-neon-lime/20" },
+    { label: "Protein", value: `${recipe.macros.protein}g`, icon: Beef, color: "text-[#00a699]", bg: "bg-[#00a699]/10", border: "border-[#00a699]/20" },
     { label: "Calories", value: recipe.macros.calories, icon: Flame, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" },
     { label: "Carbs", value: `${recipe.macros.carbs}g`, icon: Wheat, color: "text-sky-500", bg: "bg-sky-500/10", border: "border-sky-500/20" },
     { label: "Fat", value: `${recipe.macros.fat}g`, icon: Droplets, color: "text-rose-400", bg: "bg-rose-400/10", border: "border-rose-400/20" },
@@ -78,7 +78,7 @@ export default function RecipeModal({ recipe, onClose }) {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
             <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
               <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full bg-neon-lime text-black text-xs font-bold uppercase tracking-wider">
+                <span className="px-3 py-1 rounded-full bg-[#00a699] text-white text-xs font-bold uppercase tracking-wider">
                   {recipe.category.replace("-", " ")}
                 </span>
                 <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur text-white text-xs font-semibold flex items-center gap-1">
@@ -138,7 +138,7 @@ export default function RecipeModal({ recipe, onClose }) {
               {/* Ingredients */}
               <div className="md:col-span-2">
                 <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <ChefHat className="h-5 w-5 text-neon-lime" />
+                  <ChefHat className="h-5 w-5 text-[#00a699]" />
                   Ingredients
                 </h3>
                 <ul className="space-y-2.5">
@@ -148,7 +148,7 @@ export default function RecipeModal({ recipe, onClose }) {
                       className="flex items-start gap-3 text-sm text-slate-700"
                     >
                       <span className="mt-0.5 w-5 h-5 rounded-full border-2 border-slate-200 flex items-center justify-center shrink-0">
-                        <span className="w-1.5 h-1.5 rounded-full bg-neon-lime" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#00a699]" />
                       </span>
                       {ing}
                     </li>
@@ -159,13 +159,13 @@ export default function RecipeModal({ recipe, onClose }) {
               {/* Instructions */}
               <div className="md:col-span-3">
                 <h3 className="text-lg font-bold text-slate-900 mb-4 flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-neon-lime" />
+                  <CheckCircle2 className="h-5 w-5 text-[#00a699]" />
                   Step-by-Step Instructions
                 </h3>
                 <ol className="space-y-4">
                   {recipe.instructions.map((step, i) => (
                     <li key={i} className="flex gap-4">
-                      <span className="shrink-0 w-8 h-8 rounded-xl bg-slate-900 text-neon-lime flex items-center justify-center text-sm font-bold">
+                      <span className="shrink-0 w-8 h-8 rounded-xl bg-slate-900 text-[#00a699] flex items-center justify-center text-sm font-bold">
                         {i + 1}
                       </span>
                       <p className="text-sm text-slate-700 leading-relaxed pt-1">

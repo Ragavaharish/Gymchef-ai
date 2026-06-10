@@ -158,6 +158,7 @@ export async function generateWeeklyMealPlan(goal, calories, protein, dietaryPre
         }
 
         Important: Ensure the sum of macros for each day roughly matches the targets (Calories: ${calories} kcal, Protein: ${protein}g).
+        Suggest delicious, high-protein Indian fitness foods, meals, and snacks (like Masala Egg Bhurji, Paneer Stuffed Moong Dal Chilla, Chicken Tikka, Soya Chunks Masala, Dal Tadka, Chana Chaat, and Sprouts) using healthy prep methods (low ghee/oil).
         Return ONLY valid raw JSON. Do not include markdown formatting.
       `;
       const result = await model.generateContent(prompt);
@@ -167,12 +168,12 @@ export async function generateWeeklyMealPlan(goal, calories, protein, dietaryPre
       return JSON.parse(cleanText);
     } catch (e) {
       console.error("Gemini plan generator failed, using mock plan generator:", e);
-      return getMockWeeklyPlan(goal, calories, protein);
+      return getMockWeeklyPlan(goal, calories, protein, dietaryPreference);
     }
   } else {
     return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(getMockWeeklyPlan(goal, calories, protein));
+        resolve(getMockWeeklyPlan(goal, calories, protein, dietaryPreference));
       }, 1500);
     });
   }
@@ -289,27 +290,54 @@ function getMockScanResponse() {
   };
 }
 
-function getMockWeeklyPlan(goal, calories, protein) {
+function getMockWeeklyPlan(goal, calories, protein, dietaryPreference = "any") {
   const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
   const plan = {};
   
-  // Set up mock items
+  // Set up mock items with a delicious Indian fitness twist based on user preference
+  const isVeg = dietaryPreference === "veg";
+  const isNonVeg = dietaryPreference === "non-veg";
+
   const mealPool = {
-    breakfast: [
-      { name: "Anabolic French Toast", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 45, fat: 8, ingredients: ["Egg whites", "Whole wheat bread", "Cinnamon", "Protein powder"] },
-      { name: "Pre-Workout Peanut Butter Oats", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 55, fat: 12, ingredients: ["Rolled oats", "Peanut butter", "Banana", "Milk", "Whey"] }
+    breakfast: isVeg ? [
+      { name: "Paneer Stuffed Moong Dal Chilla", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 40, fat: 10, ingredients: ["Moong dal batter", "Low-fat paneer", "Carrot", "Green chilies", "Mint chutney"] },
+      { name: "High-Protein Besan Chilla with Tofu", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 42, fat: 8, ingredients: ["Besan flour", "Crumble tofu", "Onion", "Spinach", "Spices"] }
+    ] : isNonVeg ? [
+      { name: "High-Protein Masala Egg Bhurji with Roti", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 35, fat: 12, ingredients: ["Whole eggs", "Egg whites", "Onion & Tomato", "Spices", "Whole wheat roti"] },
+      { name: "Double-Egg Masala Omelette with Toast", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 30, fat: 14, ingredients: ["Eggs", "Egg whites", "Bell peppers", "Spices", "Artisanal toast"] }
+    ] : [ // any / both
+      { name: "High-Protein Masala Egg Bhurji with Roti", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 35, fat: 12, ingredients: ["Whole eggs", "Egg whites", "Onion & Tomato", "Spices", "Whole wheat roti"] },
+      { name: "Paneer Stuffed Moong Dal Chilla", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 40, fat: 10, ingredients: ["Moong dal batter", "Low-fat paneer", "Carrot", "Green chilies", "Mint chutney"] }
     ],
-    lunch: [
-      { name: "Glazed Honey Garlic Chicken & Rice", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 60, fat: 10, ingredients: ["Chicken breast", "Jasmine rice", "Honey", "Soy sauce", "Garlic"] },
-      { name: "High-Protein Beef & Broccoli Prep", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 50, fat: 14, ingredients: ["Beef strip loin", "Broccoli", "Brown rice", "Sesame oil"] }
+    lunch: isVeg ? [
+      { name: "High-Protein Soya Chunks Masala & Roti", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 45, fat: 8, ingredients: ["Soya chunks", "Onion-tomato gravy", "Whole wheat roti", "Sprouts salad"] },
+      { name: "Dal Makhani (Low Fat) with Quinoa", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 50, fat: 8, ingredients: ["Black lentils", "Kidney beans", "Low-fat cream", "Quinoa", "Cucumber salad"] }
+    ] : isNonVeg ? [
+      { name: "Tandoori Chicken Tikka with Brown Rice", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 50, fat: 10, ingredients: ["Marinated chicken breast", "Brown rice", "Cucumber salad", "Mint dip"] },
+      { name: "Indian Spiced Chicken Keema Bowl", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 48, fat: 12, ingredients: ["Lean ground chicken", "Indian spices", "Basmati rice", "Steamed broccoli"] }
+    ] : [ // any / both
+      { name: "Tandoori Chicken Tikka with Brown Rice", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 50, fat: 10, ingredients: ["Marinated chicken breast", "Brown rice", "Cucumber salad", "Mint dip"] },
+      { name: "High-Protein Soya Chunks Masala & Roti", calories: Math.round(calories * 0.30), protein: Math.round(protein * 0.35), carbs: 45, fat: 8, ingredients: ["Soya chunks", "Onion-tomato gravy", "Whole wheat roti", "Sprouts salad"] }
     ],
-    dinner: [
-      { name: "Lean Citrus Herb Baked Salmon", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 10, fat: 18, ingredients: ["Salmon fillet", "Lemon", "Asparagus", "Olive oil"] },
-      { name: "Post-Workout Sweet Potato Egg Scramble", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 40, fat: 12, ingredients: ["Eggs", "Egg whites", "Sweet potato", "Spinach"] }
+    dinner: isVeg ? [
+      { name: "Grilled Paneer Tikka Salad with Yellow Dal", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 25, fat: 14, ingredients: ["Paneer cubes", "Bell peppers", "Yellow moong dal", "Green salad"] },
+      { name: "Soya Keema Matar with Whole Wheat Roti", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 32, fat: 10, ingredients: ["Minced soya granules", "Green peas", "Whole wheat roti", "Tomato salad"] }
+    ] : isNonVeg ? [
+      { name: "Indian Spiced Baked Fish with Quinoa", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 30, fat: 10, ingredients: ["Cod or Rohu fish fillet", "Tandoori rub", "Quinoa", "Steamed beans"] },
+      { name: "Tandoori Grilled Salmon with Salad", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 12, fat: 18, ingredients: ["Salmon fillet", "Indian spices", "Mixed greens", "Lemon slice"] }
+    ] : [ // any / both
+      { name: "Grilled Paneer Tikka Salad with Yellow Dal", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 25, fat: 14, ingredients: ["Paneer cubes", "Bell peppers", "Yellow moong dal", "Green salad"] },
+      { name: "Indian Spiced Baked Fish with Quinoa", calories: Math.round(calories * 0.25), protein: Math.round(protein * 0.25), carbs: 30, fat: 10, ingredients: ["Cod or Rohu fish fillet", "Tandoori rub", "Quinoa", "Steamed beans"] }
     ],
-    snack: [
-      { name: "Greek Yogurt & Berry Power Bowl", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 20, fat: 5, ingredients: ["Greek Yogurt", "Berries", "Chia seeds", "Honey"] },
-      { name: "Double-Decker Turkey Club Wrap", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 25, fat: 8, ingredients: ["Low carb tortilla", "Turkey slices", "Turkey bacon", "Lettuce"] }
+    snack: isVeg ? [
+      { name: "Roasted Masala Chickpeas & Chaat", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 25, fat: 4, ingredients: ["Boiled chickpeas", "Cucumber & Onion", "Chaat masala", "Lemon juice"] },
+      { name: "Mango Almond Protein Shake", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 20, fat: 6, ingredients: ["Whey protein", "Almond milk", "Mango pulp", "Soaked almonds"] }
+    ] : isNonVeg ? [
+      { name: "Boiled Eggs with Chaat Masala", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 8, fat: 12, ingredients: ["Hard-boiled eggs", "Chaat masala", "Black pepper", "Salt"] },
+      { name: "Mango Almond Protein Shake", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 20, fat: 6, ingredients: ["Whey protein", "Almond milk", "Mango pulp", "Soaked almonds"] }
+    ] : [ // any / both
+      { name: "Roasted Masala Chickpeas & Chaat", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 25, fat: 4, ingredients: ["Boiled chickpeas", "Cucumber & Onion", "Chaat masala", "Lemon juice"] },
+      { name: "Mango Almond Protein Shake", calories: Math.round(calories * 0.20), protein: Math.round(protein * 0.15), carbs: 20, fat: 6, ingredients: ["Whey protein", "Almond milk", "Mango pulp", "Soaked almonds"] }
     ]
   };
 

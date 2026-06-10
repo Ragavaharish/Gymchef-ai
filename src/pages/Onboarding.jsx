@@ -29,7 +29,7 @@ export default function Onboarding() {
     height: "",
     activityLevel: "moderately_active",
     fitnessGoal: "muscle_gain",
-    dietaryPreference: "non-veg"
+    dietaryPreference: "any"
   });
 
   const [errors, setErrors] = useState({});
@@ -89,16 +89,20 @@ export default function Onboarding() {
     : null;
 
   return (
-    <div className="min-h-screen bg-[#050505] text-slate-900 flex flex-col justify-center items-center p-4">
+    <div className="min-h-screen bg-[#0d0d0d] text-slate-900 flex flex-col justify-center items-center p-4 relative overflow-hidden">
+      {/* Premium background radial highlights */}
+      <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-[#00a699]/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#e65c5c]/5 rounded-full blur-[100px] pointer-events-none" />
+
       {/* Progress Header */}
-      <div className="w-full max-w-lg mb-8">
-        <div className="flex justify-between items-center text-xs text-slate-500 mb-3 uppercase tracking-wider font-semibold">
+      <div className="w-full max-w-lg mb-8 relative z-10">
+        <div className="flex justify-between items-center text-xs text-slate-400 mb-3 uppercase tracking-wider font-semibold">
           <span>Step {step} of 3</span>
           <span>{step === 1 ? "Personal Info" : step === 2 ? "Body Parameters" : "Fitness Goals"}</span>
         </div>
-        <div className="w-full bg-dark-border h-1.5 rounded-full overflow-hidden">
+        <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
           <motion.div 
-            className="bg-neon-lime h-full"
+            className="bg-[#00a699] h-full"
             initial={{ width: "33%" }}
             animate={{ width: step === 1 ? "33%" : step === 2 ? "66%" : "100%" }}
             transition={{ duration: 0.4 }}
@@ -107,14 +111,14 @@ export default function Onboarding() {
       </div>
 
       {/* Main card panel */}
-      <div className="w-full max-w-lg bg-white border border-slate-200 shadow-sm p-8 rounded-3xl border border-slate-200 shadow-2xl relative">
+      <div className="w-full max-w-lg bg-white border border-slate-200 shadow-2xl p-8 rounded-3xl relative z-10">
         <AnimatePresence>
           {submitError && (
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="flex items-center space-x-2 p-3 mb-6 rounded-xl bg-neon-red/10 border border-neon-red/20 text-neon-red text-xs font-semibold"
+              className="flex items-center space-x-2 p-3 mb-6 rounded-xl bg-rose-50 border border-rose-100 text-[#e65c5c] text-xs font-semibold"
             >
               <AlertCircle className="h-4 w-4 shrink-0" />
               <span>{submitError}</span>
@@ -134,7 +138,7 @@ export default function Onboarding() {
             >
               <div>
                 <h3 className="text-xl font-bold flex items-center gap-2">
-                  <User className="text-neon-lime h-5 w-5" />
+                  <User className="text-[#00a699] h-5 w-5" />
                   <span>Tell us about yourself</span>
                 </h3>
                 <p className="text-sm text-slate-500 mt-1">We need some basic info to start tailoring your coaching experience.</p>
@@ -148,9 +152,9 @@ export default function Onboarding() {
                     value={formData.name}
                     onChange={(e) => handleInputChange("name", e.target.value)}
                     placeholder="Enter your name"
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                   />
-                  {errors.name && <p className="text-xs text-neon-red pl-1">{errors.name}</p>}
+                  {errors.name && <p className="text-xs text-[#e65c5c] pl-1">{errors.name}</p>}
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
@@ -161,9 +165,9 @@ export default function Onboarding() {
                       value={formData.age}
                       onChange={(e) => handleInputChange("age", e.target.value)}
                       placeholder="e.g. 25"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                     />
-                    {errors.age && <p className="text-xs text-neon-red pl-1">{errors.age}</p>}
+                    {errors.age && <p className="text-xs text-[#e65c5c] pl-1">{errors.age}</p>}
                   </div>
 
                   <div className="space-y-1.5">
@@ -171,10 +175,10 @@ export default function Onboarding() {
                     <select
                       value={formData.gender}
                       onChange={(e) => handleInputChange("gender", e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
                     >
-                      <option value="male" className="bg-[#121212]">Male</option>
-                      <option value="female" className="bg-[#121212]">Female</option>
+                      <option value="male" className="bg-white text-slate-900">Male</option>
+                      <option value="female" className="bg-white text-slate-900">Female</option>
                     </select>
                   </div>
                 </div>
@@ -193,7 +197,7 @@ export default function Onboarding() {
             >
               <div>
                 <h3 className="text-xl font-bold flex items-center gap-2">
-                  <Scale className="text-neon-lime h-5 w-5" />
+                  <Scale className="text-[#00a699] h-5 w-5" />
                   <span>Physical Statistics</span>
                 </h3>
                 <p className="text-sm text-slate-500 mt-1">These values are critical to calculate your BMR and TDEE correctly.</p>
@@ -208,9 +212,9 @@ export default function Onboarding() {
                       value={formData.weight}
                       onChange={(e) => handleInputChange("weight", e.target.value)}
                       placeholder="e.g. 75"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                     />
-                    {errors.weight && <p className="text-xs text-neon-red pl-1">{errors.weight}</p>}
+                    {errors.weight && <p className="text-xs text-[#e65c5c] pl-1">{errors.weight}</p>}
                   </div>
 
                   <div className="space-y-1.5">
@@ -220,27 +224,27 @@ export default function Onboarding() {
                       value={formData.height}
                       onChange={(e) => handleInputChange("height", e.target.value)}
                       placeholder="e.g. 180"
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                     />
-                    {errors.height && <p className="text-xs text-neon-red pl-1">{errors.height}</p>}
+                    {errors.height && <p className="text-xs text-[#e65c5c] pl-1">{errors.height}</p>}
                   </div>
                 </div>
 
                 <div className="space-y-1.5">
                   <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                    <Activity className="h-3 w-3 text-neon-lime" />
+                    <Activity className="h-3 w-3 text-[#00a699]" />
                     <span>Daily Activity Level</span>
                   </label>
                   <select
                     value={formData.activityLevel}
                     onChange={(e) => handleInputChange("activityLevel", e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
                   >
-                    <option value="sedentary" className="bg-[#121212]">Sedentary (desk job, low activity)</option>
-                    <option value="lightly_active" className="bg-[#121212]">Lightly Active (gym 1-3 days/week)</option>
-                    <option value="moderately_active" className="bg-[#121212]">Moderately Active (gym 3-5 days/week)</option>
-                    <option value="very_active" className="bg-[#121212]">Very Active (hard training 6-7 days/week)</option>
-                    <option value="extra_active" className="bg-[#121212]">Extra Active (athlete, active labor job)</option>
+                    <option value="sedentary" className="bg-white text-slate-900">Sedentary (desk job, low activity)</option>
+                    <option value="lightly_active" className="bg-white text-slate-900">Lightly Active (gym 1-3 days/week)</option>
+                    <option value="moderately_active" className="bg-white text-slate-900">Moderately Active (gym 3-5 days/week)</option>
+                    <option value="very_active" className="bg-white text-slate-900">Very Active (hard training 6-7 days/week)</option>
+                    <option value="extra_active" className="bg-white text-slate-900">Extra Active (athlete, active labor job)</option>
                   </select>
                 </div>
               </div>
@@ -258,7 +262,7 @@ export default function Onboarding() {
             >
               <div>
                 <h3 className="text-xl font-bold flex items-center gap-2">
-                  <TrendingUp className="text-neon-lime h-5 w-5" />
+                  <TrendingUp className="text-[#00a699] h-5 w-5" />
                   <span>Target Goals</span>
                 </h3>
                 <p className="text-sm text-slate-500 mt-1">Select your primary objective and dietary restriction.</p>
@@ -268,54 +272,55 @@ export default function Onboarding() {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                      <Compass className="h-3 w-3 text-neon-lime" />
+                      <Compass className="h-3 w-3 text-[#00a699]" />
                       <span>Fitness Goal</span>
                     </label>
                     <select
                       value={formData.fitnessGoal}
                       onChange={(e) => handleInputChange("fitnessGoal", e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
                     >
-                      <option value="muscle_gain" className="bg-[#121212]">💪 Muscle Gain</option>
-                      <option value="fat_loss" className="bg-[#121212]">🔥 Fat Loss</option>
-                      <option value="maintenance" className="bg-[#121212]">⚡ Maintenance</option>
+                      <option value="muscle_gain" className="bg-white text-slate-900">💪 Muscle Gain</option>
+                      <option value="fat_loss" className="bg-white text-slate-900">🔥 Fat Loss</option>
+                      <option value="maintenance" className="bg-white text-slate-900">⚡ Maintenance</option>
                     </select>
                   </div>
 
                   <div className="space-y-1.5">
                     <label className="text-xs font-semibold uppercase tracking-wider text-slate-500 flex items-center gap-1">
-                      <UtensilsCrossed className="h-3 w-3 text-neon-lime" />
+                      <UtensilsCrossed className="h-3 w-3 text-[#00a699]" />
                       <span>Preference</span>
                     </label>
                     <select
                       value={formData.dietaryPreference}
                       onChange={(e) => handleInputChange("dietaryPreference", e.target.value)}
-                      className="w-full bg-slate-50 border border-slate-200 focus:border-neon-lime rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
+                      className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 outline-none transition-all"
                     >
-                      <option value="veg" className="bg-[#121212]">🍀 Veg (Vegetarian)</option>
-                      <option value="non-veg" className="bg-[#121212]">🍗 Non-Veg (Meat & Fish)</option>
+                      <option value="any" className="bg-white text-slate-900">🍛 Both (Veg & Non-Veg)</option>
+                      <option value="veg" className="bg-white text-slate-900">🍀 Veg (Vegetarian)</option>
+                      <option value="non-veg" className="bg-white text-slate-900">🍗 Non-Veg (Meat & Fish)</option>
                     </select>
                   </div>
                 </div>
 
                 {/* Macro Target Preview */}
                 {liveMacros && (
-                  <div className="p-4 rounded-2xl bg-black/50 border border-neon-lime/20 space-y-3">
-                    <p className="text-xs font-bold text-neon-lime uppercase tracking-wider">Calculated Nutrition Profile</p>
+                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                    <p className="text-xs font-bold text-slate-950 uppercase tracking-wider">Calculated Nutrition Profile</p>
                     <div className="grid grid-cols-4 gap-2 text-center">
-                      <div className="p-2 bg-slate-100 rounded-xl border border-white/5">
+                      <div className="p-2 bg-white rounded-xl border border-slate-200">
                         <p className="text-[10px] text-slate-500 uppercase font-bold">Calories</p>
                         <p className="text-sm font-bold text-slate-900 mt-0.5">{liveMacros.calories}</p>
                       </div>
-                      <div className="p-2 bg-slate-100 rounded-xl border border-white/5">
+                      <div className="p-2 bg-white rounded-xl border border-slate-200">
                         <p className="text-[10px] text-slate-500 uppercase font-bold">Protein</p>
-                        <p className="text-sm font-bold text-neon-lime mt-0.5">{liveMacros.protein}g</p>
+                        <p className="text-sm font-bold text-slate-900 mt-0.5">{liveMacros.protein}g</p>
                       </div>
-                      <div className="p-2 bg-slate-100 rounded-xl border border-white/5">
+                      <div className="p-2 bg-white rounded-xl border border-slate-200">
                         <p className="text-[10px] text-slate-500 uppercase font-bold">Carbs</p>
                         <p className="text-sm font-bold text-slate-900 mt-0.5">{liveMacros.carbs}g</p>
                       </div>
-                      <div className="p-2 bg-slate-100 rounded-xl border border-white/5">
+                      <div className="p-2 bg-white rounded-xl border border-slate-200">
                         <p className="text-[10px] text-slate-500 uppercase font-bold">Fat</p>
                         <p className="text-sm font-bold text-slate-900 mt-0.5">{liveMacros.fat}g</p>
                       </div>
@@ -354,7 +359,7 @@ export default function Onboarding() {
           {step < 3 ? (
             <button
               onClick={handleNext}
-              className="px-5 py-2.5 rounded-xl bg-neon-lime text-black hover:bg-neon-lime/90 flex items-center gap-1.5 transition-all text-sm font-bold shadow-lg shadow-neon-lime/10"
+              className="px-5 py-2.5 rounded-xl bg-[#00a699] text-white hover:bg-[#00a699]/90 flex items-center gap-1.5 transition-all text-sm font-bold shadow-lg shadow-[#00a699]/10"
             >
               <span>Continue</span>
               <ChevronRight className="h-4 w-4" />
@@ -362,7 +367,7 @@ export default function Onboarding() {
           ) : (
             <button
               onClick={handleSubmit}
-              className="px-6 py-2.5 rounded-xl bg-neon-lime text-black hover:bg-neon-lime/90 flex items-center gap-1.5 transition-all text-sm font-bold shadow-lg shadow-neon-lime/15 glow-green"
+              className="px-6 py-2.5 rounded-xl bg-[#e65c5c] text-white hover:bg-[#d54b4b] flex items-center gap-1.5 transition-all text-sm font-bold shadow-lg shadow-[#e65c5c]/15"
             >
               <span>Build My Plan</span>
               <Check className="h-4 w-4" />

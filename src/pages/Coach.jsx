@@ -12,8 +12,8 @@ function renderMarkdown(text) {
   if (!text) return "";
   return text
     // Headers
-    .replace(/^#### (.+)$/gm, '<h4 class="text-sm font-bold text-neon-lime mt-3 mb-1">$1</h4>')
-    .replace(/^### (.+)$/gm, '<h3 class="text-base font-bold text-neon-lime mt-4 mb-1.5">$1</h3>')
+    .replace(/^#### (.+)$/gm, '<h4 class="text-sm font-bold text-[#00a699] mt-3 mb-1">$1</h4>')
+    .replace(/^### (.+)$/gm, '<h3 class="text-base font-bold text-[#00a699] mt-4 mb-1.5">$1</h3>')
     .replace(/^## (.+)$/gm, '<h2 class="text-lg font-bold text-slate-900 mt-4 mb-2">$1</h2>')
     // Bold
     .replace(/\*\*(.+?)\*\*/g, '<strong class="text-slate-900 font-semibold">$1</strong>')
@@ -38,14 +38,14 @@ function TypingIndicator() {
       exit={{ opacity: 0, y: 10 }}
       className="flex items-start gap-3 max-w-[85%]"
     >
-      <div className="shrink-0 mt-1 w-8 h-8 rounded-full bg-neon-lime/10 border border-neon-lime/20 flex items-center justify-center">
-        <Bot className="h-4 w-4 text-neon-lime" />
+      <div className="shrink-0 mt-1 w-8 h-8 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 flex items-center justify-center">
+        <Bot className="h-4 w-4 text-[#00a699]" />
       </div>
       <div className="bg-white border border-slate-200 shadow-lg rounded-2xl rounded-tl-sm px-5 py-4 flex items-center gap-1.5">
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="w-2 h-2 rounded-full bg-neon-lime/70"
+            className="w-2 h-2 rounded-full bg-[#00a699]/70"
             animate={{ y: [0, -6, 0] }}
             transition={{
               duration: 0.6,
@@ -69,7 +69,7 @@ function VoiceOrb({ isActive, isSpeaking }) {
       {/* Outer glow ring */}
       <motion.div
         className={`absolute inset-0 rounded-full ${
-          isActive || isSpeaking ? "bg-neon-lime/5" : "bg-white/[0.02]"
+          isActive ? "bg-[#e65c5c]/5" : isSpeaking ? "bg-[#00a699]/5" : "bg-white/[0.02]"
         }`}
         animate={
           isActive || isSpeaking
@@ -83,9 +83,9 @@ function VoiceOrb({ isActive, isSpeaking }) {
       <motion.div
         className={`absolute inset-4 rounded-full border ${
           isActive
-            ? "border-neon-lime/40"
+            ? "border-[#e65c5c]/40"
             : isSpeaking
-            ? "border-neon-lime/30"
+            ? "border-[#00a699]/30"
             : "border-slate-200"
         }`}
         animate={
@@ -100,9 +100,9 @@ function VoiceOrb({ isActive, isSpeaking }) {
       <motion.div
         className={`absolute inset-8 rounded-full flex items-center justify-center ${
           isActive
-            ? "bg-neon-lime/10 border border-neon-lime/30 pulse-neon"
+            ? "bg-[#e65c5c]/10 border border-[#e65c5c]/30"
             : isSpeaking
-            ? "bg-neon-lime/10 border border-neon-lime/20 pulse-neon"
+            ? "bg-[#00a699]/10 border border-[#00a699]/20"
             : "bg-white border border-slate-200"
         }`}
         animate={
@@ -119,9 +119,9 @@ function VoiceOrb({ isActive, isSpeaking }) {
         }}
       >
         {isSpeaking ? (
-          <Volume2 className="h-10 w-10 text-neon-lime" />
+          <Volume2 className="h-10 w-10 text-[#00a699]" />
         ) : isActive ? (
-          <Mic className="h-10 w-10 text-neon-lime" />
+          <Mic className="h-10 w-10 text-[#e65c5c]" />
         ) : (
           <Mic className="h-10 w-10 text-slate-500" />
         )}
@@ -131,12 +131,16 @@ function VoiceOrb({ isActive, isSpeaking }) {
       {(isActive || isSpeaking) && (
         <>
           <motion.div
-            className="absolute inset-2 rounded-full border-2 border-transparent border-t-neon-green/25"
+            className={`absolute inset-2 rounded-full border-2 border-transparent ${
+              isActive ? "border-t-[#e65c5c]/25" : "border-t-[#00a699]/25"
+            }`}
             animate={{ rotate: 360 }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
           <motion.div
-            className="absolute inset-1 rounded-full border-2 border-transparent border-b-neon-green/15"
+            className={`absolute inset-1 rounded-full border-2 border-transparent ${
+              isActive ? "border-b-[#e65c5c]/15" : "border-b-[#00a699]/15"
+            }`}
             animate={{ rotate: -360 }}
             transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
           />
@@ -252,9 +256,9 @@ export default function Coach() {
     : "Tap to speak";
 
   const voiceStatusColor = isListening
-    ? "text-neon-lime"
+    ? "text-[#e65c5c]"
     : isSpeaking
-    ? "text-neon-lime"
+    ? "text-[#00a699]"
     : "text-slate-500";
 
   return (
@@ -279,7 +283,7 @@ export default function Coach() {
         {/* Header */}
         <div className="relative z-10 text-center mb-2">
           <div className="flex items-center justify-center gap-2 mb-1">
-            <Sparkles className="h-5 w-5 text-neon-lime" />
+            <Sparkles className="h-5 w-5 text-[#00a699]" />
             <h2 className="text-lg font-bold text-slate-900 tracking-tight">Voice Coach</h2>
           </div>
           <p className="text-xs text-slate-500">AI-powered nutrition assistant</p>
@@ -308,8 +312,8 @@ export default function Coach() {
             disabled={!speechSupported}
             className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-300 ${
               isListening
-                ? "bg-neon-red/20 border-2 border-neon-red text-neon-red shadow-lg shadow-neon-red/20 hover:bg-neon-red/30"
-                : "bg-neon-lime/10 border-2 border-neon-lime/40 text-neon-lime hover:bg-neon-lime/20 hover:border-neon-lime glow-green"
+                ? "bg-[#e65c5c]/20 border-2 border-[#e65c5c] text-[#e65c5c] shadow-lg shadow-[#e65c5c]/20 hover:bg-[#e65c5c]/30"
+                : "bg-[#00a699]/10 border-2 border-[#00a699]/40 text-[#00a699] hover:bg-[#00a699]/20 hover:border-[#00a699] shadow"
             } disabled:opacity-30 disabled:cursor-not-allowed`}
             title={isListening ? "Stop listening" : "Start listening"}
           >
@@ -330,7 +334,7 @@ export default function Coach() {
               }}
               className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 border ${
                 autoSpeak
-                  ? "bg-neon-lime/10 border-neon-lime/30 text-neon-lime"
+                  ? "bg-[#00a699]/10 border-[#00a699]/30 text-[#00a699]"
                   : "bg-white border-slate-200 text-slate-500"
               }`}
               title={autoSpeak ? "Auto-speak ON" : "Auto-speak OFF"}
@@ -358,25 +362,25 @@ export default function Coach() {
         initial={{ x: 40, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex-1 flex flex-col min-h-0 bg-dark/50"
+        className="flex-1 flex flex-col min-h-0 bg-white"
       >
         {/* ──── Chat Header ──── */}
         <div className="shrink-0 px-5 py-3 border-b border-slate-200 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-neon-lime/10 border border-neon-lime/20 flex items-center justify-center glow-green">
-              <Bot className="h-5 w-5 text-neon-lime" />
+            <div className="w-9 h-9 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 flex items-center justify-center shadow-inner">
+              <Bot className="h-5 w-5 text-[#00a699]" />
             </div>
             <div>
               <h3 className="text-sm font-bold text-slate-900">GymChief AI</h3>
-              <p className="text-[11px] text-neon-lime flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-neon-lime inline-block animate-pulse" />
+              <p className="text-[11px] text-[#00a699] flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00a699] inline-block animate-pulse" />
                 Online
               </p>
             </div>
           </div>
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-neon-lime/5 border border-neon-lime/10">
-            <Zap className="h-3 w-3 text-neon-lime" />
-            <span className="text-[10px] text-neon-lime font-medium uppercase tracking-wider">
+          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00a699]/5 border border-[#00a699]/10">
+            <Zap className="h-3 w-3 text-[#00a699]" />
+            <span className="text-[10px] text-[#00a699] font-medium uppercase tracking-wider">
               AI Powered
             </span>
           </div>
@@ -392,13 +396,13 @@ export default function Coach() {
               transition={{ duration: 0.5 }}
               className="flex flex-col items-center justify-center h-full text-center py-12"
             >
-              <div className="w-16 h-16 rounded-2xl bg-neon-lime/10 border border-neon-lime/20 flex items-center justify-center mb-4 glow-green">
-                <Bot className="h-8 w-8 text-neon-lime" />
+              <div className="w-16 h-16 rounded-2xl bg-[#00a699]/10 border border-[#00a699]/20 flex items-center justify-center mb-4 shadow-sm">
+                <Bot className="h-8 w-8 text-[#00a699]" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 mb-2">
                 Hey! I&apos;m your AI Coach 💪
               </h3>
-              <p className="text-sm text-slate-500 max-w-sm mb-6">
+              <p className="text-sm text-slate-500 max-w-sm mb-6 font-medium">
                 Ask me anything about nutrition, meal plans, recipes, macros, or
                 fitness goals. Use voice or text — I&apos;m ready.
               </p>
@@ -409,7 +413,7 @@ export default function Coach() {
                     key={s.id}
                     id={s.id}
                     onClick={() => handleSuggestion(s.label)}
-                    className="px-4 py-2 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-900 hover:border-neon-lime/40 hover:text-neon-lime hover:bg-neon-lime/5 transition-all duration-300"
+                    className="px-4 py-2 rounded-full text-xs font-bold bg-white border border-slate-200 text-slate-700 hover:border-[#00a699]/40 hover:text-[#00a699] hover:bg-[#00a699]/5 transition-all duration-300 shadow-sm"
                   >
                     {s.icon} {s.label}
                   </button>
@@ -435,8 +439,8 @@ export default function Coach() {
                 >
                   {/* AI avatar */}
                   {!isUser && (
-                    <div className="shrink-0 mt-1 w-8 h-8 rounded-full bg-neon-lime/10 border border-neon-lime/20 flex items-center justify-center">
-                      <Bot className="h-4 w-4 text-neon-lime" />
+                    <div className="shrink-0 mt-1 w-8 h-8 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 flex items-center justify-center">
+                      <Bot className="h-4 w-4 text-[#00a699]" />
                     </div>
                   )}
 
@@ -444,8 +448,8 @@ export default function Coach() {
                   <div
                     className={`max-w-[80%] md:max-w-[75%] rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                       isUser
-                        ? "bg-white border border-slate-200 text-slate-900 rounded-tr-sm"
-                        : "bg-white border border-slate-200 shadow-lg text-slate-900 rounded-tl-sm"
+                        ? "bg-slate-50 border border-slate-100 text-slate-800 rounded-tr-sm"
+                        : "bg-white border border-slate-200 shadow-sm text-slate-800 rounded-tl-sm"
                     }`}
                   >
                     {isUser ? (
@@ -463,7 +467,7 @@ export default function Coach() {
                   {/* User avatar */}
                   {isUser && (
                     <div className="shrink-0 mt-1 w-8 h-8 rounded-full bg-white border border-slate-200 flex items-center justify-center">
-                      <User className="h-4 w-4 text-slate-500" />
+                      <User className="h-4 w-4 text-slate-450" />
                     </div>
                   )}
                 </motion.div>
@@ -486,7 +490,7 @@ export default function Coach() {
                 key={`inline-${s.id}`}
                 id={`inline-${s.id}`}
                 onClick={() => handleSuggestion(s.label)}
-                className="shrink-0 px-3 py-1.5 rounded-full text-[11px] font-medium bg-white/80 border border-slate-200 text-slate-500 hover:border-neon-lime/40 hover:text-neon-lime hover:bg-neon-lime/5 transition-all duration-200"
+                className="shrink-0 px-3 py-1.5 rounded-full text-[11px] font-bold bg-white/80 border border-slate-200 text-slate-500 hover:border-[#00a699]/40 hover:text-[#00a699] hover:bg-[#00a699]/5 transition-all duration-200 shadow-sm"
               >
                 {s.icon} {s.label}
               </button>
@@ -507,7 +511,7 @@ export default function Coach() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about nutrition, recipes, macros..."
             disabled={isLoading}
-            className="flex-1 bg-white/70 border border-slate-200 focus:border-neon-lime/50 rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-dark-muted outline-none transition-all duration-300 disabled:opacity-50"
+            className="flex-1 bg-white border border-slate-200 focus:border-[#00a699] rounded-xl py-3 px-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all duration-300 disabled:opacity-50"
           />
 
           {/* Voice shortcut in input area */}
@@ -518,8 +522,8 @@ export default function Coach() {
               onClick={handleVoiceToggle}
               className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all duration-300 border ${
                 isListening
-                  ? "bg-neon-red/20 border-neon-red text-neon-red"
-                  : "bg-white border-slate-200 text-slate-500 hover:text-neon-lime hover:border-neon-lime/30"
+                  ? "bg-[#e65c5c]/20 border-[#e65c5c] text-[#e65c5c]"
+                  : "bg-white border-slate-200 text-slate-500 hover:text-[#00a699] hover:border-[#00a699]/30"
               }`}
               title={isListening ? "Stop" : "Voice input"}
             >
@@ -535,7 +539,7 @@ export default function Coach() {
             id="coach-send-btn"
             type="submit"
             disabled={isLoading || !input.trim()}
-            className="w-11 h-11 rounded-xl bg-neon-lime hover:bg-neon-lime/90 text-black flex items-center justify-center transition-all duration-300 shadow-lg shadow-neon-lime/20 disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
+            className="w-11 h-11 rounded-xl bg-[#e65c5c] hover:bg-[#d54b4b] text-white flex items-center justify-center transition-all duration-300 shadow-md shadow-[#e65c5c]/10 disabled:opacity-30 disabled:cursor-not-allowed disabled:shadow-none"
             title="Send message"
           >
             <Send className="h-4 w-4" />
