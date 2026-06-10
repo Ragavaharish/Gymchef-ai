@@ -130,7 +130,7 @@ export const RECIPES = [
       "Flake the grilled salmon on top of the salad.",
       "Drizzle with balsamic vinaigrette and lemon juice. Serve immediately.",
     ],
-    youtubeId: "22O2lApCBBs",
+    youtubeId: "f2nNnJg9J3g",
   },
 
   // ── Maintenance ──

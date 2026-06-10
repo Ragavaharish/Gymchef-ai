@@ -10,11 +10,11 @@ export default function Auth() {
 
   const [isLogin, setIsLogin] = useState(true);
   const [isForgot, setIsForgot] = useState(false);
-  
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -65,7 +65,7 @@ export default function Auth() {
       <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-[#00a699]/5 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#e65c5c]/5 rounded-full blur-[100px] pointer-events-none" />
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -81,10 +81,10 @@ export default function Auth() {
             <span className="text-[#00a699]">AI</span>
           </h2>
           <p className="text-xs text-slate-500 mt-2 text-center font-medium">
-            {isForgot 
-              ? "Recover your nutrition account parameters" 
-              : isLogin 
-                ? "Fuel your potential. Sign in to your AI dashboard." 
+            {isForgot
+              ? "Recover your nutrition account parameters"
+              : isLogin
+                ? "Fuel your potential. Sign in to your AI dashboard."
                 : "Join the elite. Compute macro budgets & log meals."}
           </p>
         </div>
@@ -92,7 +92,7 @@ export default function Auth() {
         {/* Alerts */}
         <AnimatePresence>
           {error && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -104,7 +104,7 @@ export default function Auth() {
           )}
 
           {message && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -132,7 +132,7 @@ export default function Auth() {
                   <input
                     type="text"
                     required
-                    placeholder="Enter your name"
+                    placeholder="Enter Your Name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] focus:bg-white rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
@@ -159,18 +159,7 @@ export default function Auth() {
 
           {!isForgot && (
             <div className="space-y-1.5">
-              <div className="flex justify-between items-center px-1">
-                <label className="text-xs font-black uppercase tracking-wider text-slate-400">Password</label>
-                {isLogin && (
-                  <button 
-                    type="button"
-                    onClick={() => setIsForgot(true)}
-                    className="text-xs font-bold text-[#00a699] hover:underline"
-                  >
-                    Forgot Password?
-                  </button>
-                )}
-              </div>
+              <label className="text-xs font-black uppercase tracking-wider text-slate-400 pl-1">Password</label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3.5 h-4 w-4 text-slate-400" />
                 <input
@@ -182,6 +171,17 @@ export default function Auth() {
                   className="w-full bg-slate-50 border border-slate-200 focus:border-[#00a699] focus:bg-white rounded-xl py-3 pl-10 pr-4 text-sm text-slate-900 placeholder-slate-400 outline-none transition-all"
                 />
               </div>
+              {isLogin && (
+                <div className="flex justify-end px-1 mt-1">
+                  <button 
+                    type="button"
+                    onClick={() => setIsForgot(true)}
+                    className="text-xs font-bold text-[#00a699] hover:underline"
+                  >
+                    Forgot Password?
+                  </button>
+                </div>
+              )}
             </div>
           )}
 
@@ -211,10 +211,10 @@ export default function Auth() {
             className="w-full py-3.5 bg-slate-900 hover:bg-slate-800 text-white border border-slate-800 font-bold rounded-xl flex items-center justify-center space-x-3 transition-all duration-300 disabled:opacity-50 text-xs uppercase tracking-wider shadow"
           >
             <svg className="h-5 w-5 shrink-0" viewBox="0 0 24 24" width="24" height="24">
-              <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.67 1.54 15.02 1 12 1 7.24 1 3.2 3.73 1.24 7.7l3.87 3C6.03 7.82 8.79 5.04 12 5.04z"/>
-              <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.36H12v4.51h6.46c-.29 1.48-1.14 2.73-2.4 3.58l3.76 2.91c2.2-2.03 3.67-5.01 3.67-8.64z"/>
-              <path fill="#FBBC05" d="M5.11 14.7c-.24-.7-.37-1.46-.37-2.25s.13-1.55.37-2.25L1.24 7.2C.45 8.79 0 10.59 0 12.5s.45 3.71 1.24 5.3l3.87-3.1z"/>
-              <path fill="#34A853" d="M12 23c3.24 0 5.97-1.07 7.96-2.91l-3.76-2.91c-1.1.74-2.5 1.18-4.2 1.18-3.21 0-5.97-2.78-6.89-5.66L1.24 15.7C3.2 19.67 7.24 23 12 23z"/>
+              <path fill="#EA4335" d="M12 5.04c1.66 0 3.2.57 4.38 1.69l3.27-3.27C17.67 1.54 15.02 1 12 1 7.24 1 3.2 3.73 1.24 7.7l3.87 3C6.03 7.82 8.79 5.04 12 5.04z" />
+              <path fill="#4285F4" d="M23.49 12.27c0-.81-.07-1.59-.2-2.36H12v4.51h6.46c-.29 1.48-1.14 2.73-2.4 3.58l3.76 2.91c2.2-2.03 3.67-5.01 3.67-8.64z" />
+              <path fill="#FBBC05" d="M5.11 14.7c-.24-.7-.37-1.46-.37-2.25s.13-1.55.37-2.25L1.24 7.2C.45 8.79 0 10.59 0 12.5s.45 3.71 1.24 5.3l3.87-3.1z" />
+              <path fill="#34A853" d="M12 23c3.24 0 5.97-1.07 7.96-2.91l-3.76-2.91c-1.1.74-2.5 1.18-4.2 1.18-3.21 0-5.97-2.78-6.89-5.66L1.24 15.7C3.2 19.67 7.24 23 12 23z" />
             </svg>
             <span>Continue with Google</span>
           </button>
@@ -222,7 +222,7 @@ export default function Auth() {
 
         <div className="mt-8 text-center">
           {isForgot ? (
-            <button 
+            <button
               onClick={() => setIsForgot(false)}
               className="text-xs font-bold text-[#00a699] hover:underline uppercase tracking-wider"
             >

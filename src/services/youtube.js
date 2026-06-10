@@ -5,21 +5,21 @@
 
 const YOUTUBE_API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
-// Collection of default gym meal preparation videos
+// Collection of default Indian & Tamil gym meal preparation videos
 const FALLBACK_VIDEOS = {
   muscle_gain: [
-    { title: "Full Day of Eating for Muscle Gain (Easy Meals)", videoId: "j4K3u0P_s0k", channel: "Will Tennyson" },
-    { title: "High Protein Meal Prep for Muscle Gain", videoId: "kK7e-FmK1wM", channel: "Aesthetic Cook" },
-    { title: "Ultimate 4000 Calorie Muscle Gain Recipe Guide", videoId: "K9nB54nZqrs", channel: "Chris Heria" }
+    { title: "Easy High Protein Full Day Meal Prep (Tamil - 157g Protein)", videoId: "7zQzU18Rz5g", channel: "Tharun Kumar" },
+    { title: "Full Day of Eating for Healthy Muscle Weight Gain (Tamil)", videoId: "b4wS81w_T5U", channel: "Tharun Kumar" },
+    { title: "My Bulking Diet: Full Day Of EATING (Tamil - 2300+ Calories)", videoId: "i9Yy6U0R36E", channel: "Tharun Kumar" }
   ],
   fat_loss: [
-    { title: "Low Calorie High Volume Recipes for Shredding", videoId: "S2y5hL4DkCQ", channel: "Greg Doucette" },
-    { title: "Meal Prep for Weight Loss (Easy & High Protein)", videoId: "5F_u-d4z-dM", channel: "Remington James" },
-    { title: "Healthy Eating Hacks to Lose Belly Fat", videoId: "k7m1n5x_uRk", channel: "Jeff Nippard" }
+    { title: "Free Cutting Diet Plan - Full Day of Eating (Tamil - 1100 Calories)", videoId: "UqN9N2aV16c", channel: "Tharun Kumar" },
+    { title: "12 Cheap and Best Protein Foods For Muscle Building & Fat Loss", videoId: "uC0W6iN5Sjs", channel: "Tharun Kumar" },
+    { title: "How to Lose Belly Fat Fast (Scientific Tamil Diet)", videoId: "7zQzU18Rz5g", channel: "Tharun Kumar" }
   ],
   general: [
-    { title: "How to Meal Prep Like a Pro (Gym Edition)", videoId: "kK7e-FmK1wM", channel: "Jeremy Ethier" },
-    { title: "10-Minute High Protein Gym Snacks", videoId: "5F_u-d4z-dM", channel: "GymChief AI" }
+    { title: "How to Meal Prep Like a Pro (Tamil/Indian Edition)", videoId: "7zQzU18Rz5g", channel: "Tharun Kumar" },
+    { title: "10-Minute High Protein Indian Gym Snacks & Foods", videoId: "uC0W6iN5Sjs", channel: "Tharun Kumar" }
   ]
 };
 
@@ -30,7 +30,7 @@ export async function searchCookingVideos(queryText) {
   if (YOUTUBE_API_KEY && YOUTUBE_API_KEY !== "YOUR_YOUTUBE_API_KEY" && YOUTUBE_API_KEY.trim() !== "") {
     try {
       const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-        queryText + " recipe high protein gym"
+        queryText + " recipe healthy protein indian tamil gym"
       )}&type=video&maxResults=3&key=${YOUTUBE_API_KEY}`;
       
       const response = await fetch(searchUrl);

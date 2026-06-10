@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Dumbbell, ArrowRight, ChefHat, Activity } from "lucide-react";
+import { Dumbbell, ArrowRight, ChefHat, Activity, Play } from "lucide-react";
 import { RECIPES } from "../data/recipes";
+import RecipeModal from "../components/recipes/RecipeModal";
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -11,6 +12,7 @@ const cardVariants = {
 
 export default function LandingPage() {
   const navigate = useNavigate();
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   // Highlight 3 popular recipes
   const popularRecipes = RECIPES.slice(0, 3);
@@ -112,7 +114,7 @@ export default function LandingPage() {
             Popular Healthy Recipes
           </h2>
           <p className="text-slate-500 text-sm">
-            Check out some of our high-protein culinary favorites. Log in to access detailed ingredients list, tutorial links, and tracking features.
+            Check out some of our high-protein culinary favorites. Click to view ingredients list, macro ratios, and video tutorials directly.
           </p>
         </div>
 
@@ -122,7 +124,7 @@ export default function LandingPage() {
             <motion.div
               key={recipe.id}
               variants={cardVariants}
-              onClick={() => navigate("/auth")}
+              onClick={() => setSelectedRecipe(recipe)}
               className="group bg-white rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer flex flex-col"
             >
               {/* Slanted Image Overlay */}
@@ -132,6 +134,15 @@ export default function LandingPage() {
                   alt={recipe.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
+
+                {/* Play overlay on hover */}
+                {recipe.youtubeId && (
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                    <div className="w-12 h-12 rounded-full bg-red-500 flex items-center justify-center shadow-lg shadow-red-500/30">
+                      <Play className="h-5 w-5 text-white ml-0.5" />
+                    </div>
+                  </div>
+                )}
                 
                 {/* Slanted Overlay */}
                 <div 
@@ -197,6 +208,8 @@ export default function LandingPage() {
         </div>
 
       </div>
+
+      <RecipeModal recipe={selectedRecipe} onClose={() => setSelectedRecipe(null)} />
     </div>
   );
 }
