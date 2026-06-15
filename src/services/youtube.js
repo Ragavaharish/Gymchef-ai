@@ -1,5 +1,5 @@
 /**
- * GymChief AI YouTube Video Integration
+ * GymChef AI YouTube Video Integration
  * Connects to YouTube API to find cooking tutorials, with static video fallbacks.
  */
 

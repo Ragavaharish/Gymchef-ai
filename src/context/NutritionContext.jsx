@@ -90,23 +90,23 @@ export function NutritionProvider({ children }) {
         }
       } else {
         // Offline / LocalStorage fetch
-        const storageLogs = localStorage.getItem(`gymchief_logs_${uid}_${todayStr}`);
+        const storageLogs = localStorage.getItem(`gymchef_logs_${uid}_${todayStr}`);
         if (storageLogs) {
           setDailyLogs(JSON.parse(storageLogs));
         } else {
           setDailyLogs({ calories: 0, protein: 0, carbs: 0, fat: 0, meals: [] });
         }
 
-        const storageFavs = localStorage.getItem(`gymchief_favs_${uid}`);
+        const storageFavs = localStorage.getItem(`gymchef_favs_${uid}`);
         setFavorites(storageFavs ? JSON.parse(storageFavs) : []);
 
-        const storageShakes = localStorage.getItem(`gymchief_shakes_${uid}`);
+        const storageShakes = localStorage.getItem(`gymchef_shakes_${uid}`);
         setCustomShakes(storageShakes ? JSON.parse(storageShakes) : []);
 
-        const storagePlans = localStorage.getItem(`gymchief_plans_${uid}`);
+        const storagePlans = localStorage.getItem(`gymchef_plans_${uid}`);
         setMealPlans(storagePlans ? JSON.parse(storagePlans) : []);
 
-        const storageScans = localStorage.getItem(`gymchief_scans_${uid}`);
+        const storageScans = localStorage.getItem(`gymchef_scans_${uid}`);
         setScansHistory(storageScans ? JSON.parse(storageScans) : []);
       }
       setLoadingNutrition(false);
@@ -156,7 +156,7 @@ export function NutritionProvider({ children }) {
         console.error("Error logging meal online:", e);
       }
     } else {
-      localStorage.setItem(`gymchief_logs_${uid}_${todayStr}`, JSON.stringify(updatedLogs));
+      localStorage.setItem(`gymchef_logs_${uid}_${todayStr}`, JSON.stringify(updatedLogs));
       setDailyLogs(updatedLogs);
     }
   };
@@ -188,7 +188,7 @@ export function NutritionProvider({ children }) {
         console.error("Error updating log after deletion:", e);
       }
     } else {
-      localStorage.setItem(`gymchief_logs_${uid}_${todayStr}`, JSON.stringify(updatedLogs));
+      localStorage.setItem(`gymchef_logs_${uid}_${todayStr}`, JSON.stringify(updatedLogs));
       setDailyLogs(updatedLogs);
     }
   };
@@ -211,7 +211,7 @@ export function NutritionProvider({ children }) {
         }
       } else {
         const updated = favorites.filter(f => f.recipeId !== recipe.id);
-        localStorage.setItem(`gymchief_favs_${uid}`, JSON.stringify(updated));
+        localStorage.setItem(`gymchef_favs_${uid}`, JSON.stringify(updated));
         setFavorites(updated);
       }
     } else {
@@ -237,7 +237,7 @@ export function NutritionProvider({ children }) {
         }
       } else {
         const updated = [...favorites, { id: "fav_" + Date.now(), ...newFav }];
-        localStorage.setItem(`gymchief_favs_${uid}`, JSON.stringify(updated));
+        localStorage.setItem(`gymchef_favs_${uid}`, JSON.stringify(updated));
         setFavorites(updated);
       }
     }
@@ -265,7 +265,7 @@ export function NutritionProvider({ children }) {
       }
     } else {
       const updated = [...customShakes, { id: "shake_" + Date.now(), ...newShake }];
-      localStorage.setItem(`gymchief_shakes_${uid}`, JSON.stringify(updated));
+      localStorage.setItem(`gymchef_shakes_${uid}`, JSON.stringify(updated));
       setCustomShakes(updated);
     }
   };
@@ -284,7 +284,7 @@ export function NutritionProvider({ children }) {
       }
     } else {
       const updated = customShakes.filter(s => s.id !== shakeId);
-      localStorage.setItem(`gymchief_shakes_${uid}`, JSON.stringify(updated));
+      localStorage.setItem(`gymchef_shakes_${uid}`, JSON.stringify(updated));
       setCustomShakes(updated);
     }
   };
@@ -310,7 +310,7 @@ export function NutritionProvider({ children }) {
       }
     } else {
       const updated = [...mealPlans, { id: "plan_" + Date.now(), ...newPlan }];
-      localStorage.setItem(`gymchief_plans_${uid}`, JSON.stringify(updated));
+      localStorage.setItem(`gymchef_plans_${uid}`, JSON.stringify(updated));
       setMealPlans(updated);
     }
   };
@@ -329,7 +329,7 @@ export function NutritionProvider({ children }) {
       }
     } else {
       const updated = mealPlans.filter(p => p.id !== planId);
-      localStorage.setItem(`gymchief_plans_${uid}`, JSON.stringify(updated));
+      localStorage.setItem(`gymchef_plans_${uid}`, JSON.stringify(updated));
       setMealPlans(updated);
     }
   };
@@ -357,7 +357,7 @@ export function NutritionProvider({ children }) {
       }
     } else {
       const updated = [...scansHistory, { id: "scan_" + Date.now(), ...newScan }];
-      localStorage.setItem(`gymchief_scans_${uid}`, JSON.stringify(updated));
+      localStorage.setItem(`gymchef_scans_${uid}`, JSON.stringify(updated));
       setScansHistory(updated);
     }
   };

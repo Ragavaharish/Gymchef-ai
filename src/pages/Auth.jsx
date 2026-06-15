@@ -77,7 +77,7 @@ export default function Auth() {
             <Dumbbell className="h-8 w-8 text-[#00a699]" />
           </div>
           <h2 className="text-2xl font-black tracking-tight text-slate-900 flex items-center space-x-0.5">
-            <span>GYMCHIEF</span>
+            <span>GYMCHEF</span>
             <span className="text-[#00a699]">AI</span>
           </h2>
           <p className="text-xs text-slate-500 mt-2 text-center font-medium">

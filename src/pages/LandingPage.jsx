@@ -24,13 +24,13 @@ export default function LandingPage() {
         {/* ─── Hero / Header ─── */}
         <div className="max-w-3xl mx-auto text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 text-[#00a699] text-xs font-black uppercase tracking-wider mb-5">
-            <Activity className="h-4 w-4" /> GymChief AI Ecosystem
+            <Activity className="h-4 w-4" /> GymChef AI Ecosystem
           </div>
           <h1 className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-none mb-6">
-            GYMCHIEF <span className="text-[#00a699]">AI</span>
+            GYMCHEF <span className="text-[#00a699]">AI</span>
           </h1>
           <p className="text-slate-600 text-sm md:text-base leading-relaxed max-w-2xl mx-auto">
-            We understand that for many of our members, exercise and nutrition play a huge part in physical and mental wellbeing. GymChief AI provides smart tools like voice-enabled coaching, custom meal planners, and precise body metrics to fuel your potential.
+            We understand that for many of our members, exercise and nutrition play a huge part in physical and mental wellbeing. GymChef AI provides smart tools like voice-enabled coaching, custom meal planners, and precise body metrics to fuel your potential.
           </p>
         </div>
 
@@ -45,7 +45,7 @@ export default function LandingPage() {
             
             <div className="relative z-10 flex flex-col justify-between h-full min-h-[180px]">
               <div className="border-2 border-white p-3 rounded-xl flex flex-col items-start gap-1 w-fit">
-                <span className="text-[10px] font-black tracking-widest uppercase opacity-90">GymChief AI</span>
+                <span className="text-[10px] font-black tracking-widest uppercase opacity-90">GymChef AI</span>
                 <h2 className="text-2xl font-black tracking-tighter leading-none">THE 2026</h2>
               </div>
               
@@ -68,7 +68,7 @@ export default function LandingPage() {
           <div className="p-8 md:p-10 flex flex-col justify-between flex-grow bg-white">
             <div>
               <h3 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight uppercase mb-4 leading-tight">
-                GYMCHIEF NUTRITION REPORT & CALORIE CALCULATOR
+                GYMCHEF NUTRITION REPORT & CALORIE CALCULATOR
               </h3>
               <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6">
                 Take a deep dive into your physical metrics, activity levels, and customized macronutrient targets. Our AI engine computes exact protein requirements and daily energy budgets tailored specifically to your body and lifestyle.

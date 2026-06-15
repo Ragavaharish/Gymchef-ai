@@ -25,12 +25,12 @@ if (firebaseConfig.apiKey && firebaseConfig.apiKey !== "YOUR_FIREBASE_API_KEY" &
     db = getFirestore(app);
     googleProvider = new GoogleAuthProvider();
     isFirebaseConfigured = true;
-    console.log("GymChief AI: Firebase initialized successfully");
+    console.log("GymChef AI: Firebase initialized successfully");
   } catch (error) {
-    console.error("GymChief AI: Firebase initialization failed: ", error);
+    console.error("GymChef AI: Firebase initialization failed: ", error);
   }
 } else {
-  console.warn("GymChief AI: Firebase configuration is missing. Operating in offline/localStorage mode.");
+  console.warn("GymChef AI: Firebase configuration is missing. Operating in offline/localStorage mode.");
 }
 
 export { auth, db, googleProvider, isFirebaseConfigured };

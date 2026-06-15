@@ -1,5 +1,5 @@
 /**
- * GymChief AI Nutrition Utility
+ * GymChef AI Nutrition Utility
  * Calculations for BMR, TDEE, and macros based on user stats.
  */
 

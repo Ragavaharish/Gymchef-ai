@@ -62,7 +62,7 @@ export default function Layout({ children }) {
               <Dumbbell className="h-5 w-5 text-white" />
             </div>
             <span className="text-lg font-black tracking-tight text-white flex items-center space-x-0.5">
-              <span>GYMCHIEF</span>
+              <span>GYMCHEF</span>
               <span className="text-[#00a699]">AI</span>
             </span>
           </Link>
@@ -199,7 +199,7 @@ export default function Layout({ children }) {
 
       {/* ─── Footer ─── */}
       <footer className="py-10 bg-[#111111] border-t border-slate-800 text-center text-xs text-slate-500">
-        <p className="font-semibold tracking-wider">© 2026 GYMCHIEF AI. BUILT FOR ELITE PERFORMANCE & SMART NUTRITION.</p>
+        <p className="font-semibold tracking-wider">© 2026 GYMCHEF AI. BUILT FOR ELITE PERFORMANCE & SMART NUTRITION.</p>
       </footer>
     </div>
   );

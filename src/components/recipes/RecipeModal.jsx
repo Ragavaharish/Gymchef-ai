@@ -89,7 +89,7 @@ export default function RecipeModal({ recipe, onClose }) {
             ],
             general: [
               { title: "How to Meal Prep Like a Pro (Gym Edition)", videoId: "kK7e-FmK1wM", channel: "Jeremy Ethier" },
-              { title: "10-Minute High Protein Gym Snacks", videoId: "5F_u-d4z-dM", channel: "GymChief AI" }
+              { title: "10-Minute High Protein Gym Snacks", videoId: "5F_u-d4z-dM", channel: "GymChef AI" }
             ]
           };
           

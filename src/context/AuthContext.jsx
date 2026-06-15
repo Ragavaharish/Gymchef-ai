@@ -60,8 +60,8 @@ export function AuthProvider({ children }) {
       return unsubscribe;
     } else {
       // LocalStorage guest-mode auth fallback
-      const storedUser = localStorage.getItem("gymchief_user");
-      const storedProfile = localStorage.getItem("gymchief_profile");
+      const storedUser = localStorage.getItem("gymchef_user");
+      const storedProfile = localStorage.getItem("gymchef_profile");
       if (storedUser) {
         setCurrentUser(JSON.parse(storedUser));
       }
@@ -93,7 +93,7 @@ export function AuthProvider({ children }) {
       return res.user;
     } else {
       // Offline fallback
-      const users = JSON.parse(localStorage.getItem("gymchief_registered_users") || "[]");
+      const users = JSON.parse(localStorage.getItem("gymchef_registered_users") || "[]");
       if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
         throw new Error("Email already registered!");
       }
@@ -106,10 +106,10 @@ export function AuthProvider({ children }) {
         createdAt: new Date().toISOString()
       };
       users.push(newUser);
-      localStorage.setItem("gymchief_registered_users", JSON.stringify(users));
-      localStorage.setItem(`gymchief_profile_${newUser.uid}`, JSON.stringify(profile));
-      localStorage.setItem("gymchief_user", JSON.stringify(newUser));
-      localStorage.setItem("gymchief_profile", JSON.stringify(profile));
+      localStorage.setItem("gymchef_registered_users", JSON.stringify(users));
+      localStorage.setItem(`gymchef_profile_${newUser.uid}`, JSON.stringify(profile));
+      localStorage.setItem("gymchef_user", JSON.stringify(newUser));
+      localStorage.setItem("gymchef_profile", JSON.stringify(profile));
       setCurrentUser(newUser);
       setUserProfile(profile);
       return newUser;
@@ -131,13 +131,13 @@ export function AuthProvider({ children }) {
       return res.user;
     } else {
       // Offline fallback
-      const users = JSON.parse(localStorage.getItem("gymchief_registered_users") || "[]");
+      const users = JSON.parse(localStorage.getItem("gymchef_registered_users") || "[]");
       const foundUser = users.find(u => u.email.toLowerCase() === email.toLowerCase());
       if (foundUser) {
         if (foundUser.password && foundUser.password !== password) {
           throw new Error("Invalid password!");
         }
-        let profile = localStorage.getItem(`gymchief_profile_${foundUser.uid}`);
+        let profile = localStorage.getItem(`gymchef_profile_${foundUser.uid}`);
         if (profile) {
           profile = JSON.parse(profile);
         } else {
@@ -148,10 +148,10 @@ export function AuthProvider({ children }) {
             onboarded: false,
             createdAt: new Date().toISOString()
           };
-          localStorage.setItem(`gymchief_profile_${foundUser.uid}`, JSON.stringify(profile));
+          localStorage.setItem(`gymchef_profile_${foundUser.uid}`, JSON.stringify(profile));
         }
-        localStorage.setItem("gymchief_user", JSON.stringify(foundUser));
-        localStorage.setItem("gymchief_profile", JSON.stringify(profile));
+        localStorage.setItem("gymchef_user", JSON.stringify(foundUser));
+        localStorage.setItem("gymchef_profile", JSON.stringify(profile));
         setCurrentUser(foundUser);
         setUserProfile(profile);
         return foundUser;
@@ -166,10 +166,10 @@ export function AuthProvider({ children }) {
         createdAt: new Date().toISOString()
       };
       users.push(newUser);
-      localStorage.setItem("gymchief_registered_users", JSON.stringify(users));
-      localStorage.setItem(`gymchief_profile_${newUser.uid}`, JSON.stringify(profile));
-      localStorage.setItem("gymchief_user", JSON.stringify(newUser));
-      localStorage.setItem("gymchief_profile", JSON.stringify(profile));
+      localStorage.setItem("gymchef_registered_users", JSON.stringify(users));
+      localStorage.setItem(`gymchef_profile_${newUser.uid}`, JSON.stringify(profile));
+      localStorage.setItem("gymchef_user", JSON.stringify(newUser));
+      localStorage.setItem("gymchef_profile", JSON.stringify(profile));
       setCurrentUser(newUser);
       setUserProfile(profile);
       return newUser;
@@ -206,13 +206,13 @@ export function AuthProvider({ children }) {
       return res.user;
     } else {
       // Offline fallback Google Login
-      const googleUser = { uid: "google_uid_123", email: "google.gymchief@gmail.com", displayName: "Elite Lifter" };
-      const users = JSON.parse(localStorage.getItem("gymchief_registered_users") || "[]");
+      const googleUser = { uid: "google_uid_123", email: "google.gymchef@gmail.com", displayName: "Elite Lifter" };
+      const users = JSON.parse(localStorage.getItem("gymchef_registered_users") || "[]");
       if (!users.find(u => u.uid === googleUser.uid)) {
         users.push(googleUser);
-        localStorage.setItem("gymchief_registered_users", JSON.stringify(users));
+        localStorage.setItem("gymchef_registered_users", JSON.stringify(users));
       }
-      let profile = localStorage.getItem(`gymchief_profile_${googleUser.uid}`);
+      let profile = localStorage.getItem(`gymchef_profile_${googleUser.uid}`);
       if (profile) {
         profile = JSON.parse(profile);
       } else {
@@ -231,10 +231,10 @@ export function AuthProvider({ children }) {
           macros: calculateMacros(78, 178, 26, "male", "moderately_active", "muscle_gain"),
           createdAt: new Date().toISOString()
         };
-        localStorage.setItem(`gymchief_profile_${googleUser.uid}`, JSON.stringify(profile));
+        localStorage.setItem(`gymchef_profile_${googleUser.uid}`, JSON.stringify(profile));
       }
-      localStorage.setItem("gymchief_user", JSON.stringify(googleUser));
-      localStorage.setItem("gymchief_profile", JSON.stringify(profile));
+      localStorage.setItem("gymchef_user", JSON.stringify(googleUser));
+      localStorage.setItem("gymchef_profile", JSON.stringify(profile));
       setCurrentUser(googleUser);
       setUserProfile(profile);
       return googleUser;
@@ -255,8 +255,8 @@ export function AuthProvider({ children }) {
     if (isFirebaseConfigured) {
       await firebaseSignOut(auth);
     } else {
-      localStorage.removeItem("gymchief_user");
-      localStorage.removeItem("gymchief_profile");
+      localStorage.removeItem("gymchef_user");
+      localStorage.removeItem("gymchef_profile");
     }
     setCurrentUser(null);
     setUserProfile(null);
@@ -298,9 +298,9 @@ export function AuthProvider({ children }) {
         "Failed to save onboarding targets to Firestore. Database connection timed out."
       );
     } else {
-      localStorage.setItem("gymchief_profile", JSON.stringify(updatedProfile));
+      localStorage.setItem("gymchef_profile", JSON.stringify(updatedProfile));
       if (currentUser) {
-        localStorage.setItem(`gymchief_profile_${currentUser.uid}`, JSON.stringify(updatedProfile));
+        localStorage.setItem(`gymchef_profile_${currentUser.uid}`, JSON.stringify(updatedProfile));
       }
     }
     
@@ -332,9 +332,9 @@ export function AuthProvider({ children }) {
         "Failed to update profile statistics in Firestore. Database connection timed out."
       );
     } else {
-      localStorage.setItem("gymchief_profile", JSON.stringify(newProfile));
+      localStorage.setItem("gymchef_profile", JSON.stringify(newProfile));
       if (currentUser) {
-        localStorage.setItem(`gymchief_profile_${currentUser.uid}`, JSON.stringify(newProfile));
+        localStorage.setItem(`gymchef_profile_${currentUser.uid}`, JSON.stringify(newProfile));
       }
     }
 

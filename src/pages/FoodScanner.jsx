@@ -159,7 +159,7 @@ export default function FoodScanner() {
       {/* ─── Page Header (Centered like PureGym) ─── */}
       <div className="max-w-3xl mx-auto text-center mb-10">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 text-[#00a699] text-xs font-bold uppercase tracking-wider mb-4">
-          <Camera className="h-3.5 w-3.5" /> GymChief AI Scanner
+          <Camera className="h-3.5 w-3.5" /> GymChef AI Scanner
         </div>
         <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase">
           AI Food Scanner
@@ -262,7 +262,7 @@ export default function FoodScanner() {
                   </div>
                   <h3 className="text-white text-lg font-bold">Ready to Scan</h3>
                   <p className="text-slate-400 text-xs mt-2 max-w-xs leading-relaxed">
-                    Open your camera and capture a picture of your dish. GymChief AI will instantly decompose the ingredients into accurate protein, fat, and carbohydrate estimations.
+                    Open your camera and capture a picture of your dish. GymChef AI will instantly decompose the ingredients into accurate protein, fat, and carbohydrate estimations.
                   </p>
                 </motion.div>
               )}
@@ -338,7 +338,7 @@ export default function FoodScanner() {
                   </div>
                   <h3 className="text-lg font-bold text-slate-900">Decomposing Meal Macros...</h3>
                   <p className="text-slate-500 text-sm mt-2 max-w-xs mx-auto">
-                    GymChief AI is detecting food items and running custom calorie & nutrient estimates.
+                    GymChef AI is detecting food items and running custom calorie & nutrient estimates.
                   </p>
                 </motion.div>
               )}
@@ -508,7 +508,7 @@ export default function FoodScanner() {
                   <Sparkles className="h-12 w-12 text-slate-300 mx-auto mb-4" />
                   <h3 className="text-lg font-bold text-slate-400">Awaiting Image</h3>
                   <p className="text-slate-400 text-xs mt-2 max-w-xs mx-auto leading-relaxed">
-                    Once you snap or upload a meal photo, GymChief AI will display its macronutrients, calorie breakdown, and healthier alternatives here.
+                    Once you snap or upload a meal photo, GymChef AI will display its macronutrients, calorie breakdown, and healthier alternatives here.
                   </p>
                 </motion.div>
               )}

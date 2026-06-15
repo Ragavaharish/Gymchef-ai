@@ -488,7 +488,7 @@ export default function WeeklyPlanner() {
         className="max-w-3xl mx-auto text-center mb-10"
       >
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00a699]/10 border border-[#00a699]/20 text-[#00a699] text-xs font-bold uppercase tracking-wider mb-4">
-          <CalendarDays className="h-3.5 w-3.5" /> GymChief AI Planner
+          <CalendarDays className="h-3.5 w-3.5" /> GymChef AI Planner
         </div>
         <h1 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tight mb-4 uppercase">
           Weekly Meal Planner

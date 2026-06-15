@@ -9,16 +9,16 @@ if (apiKey && apiKey !== "YOUR_GEMINI_API_KEY" && apiKey.trim() !== "") {
   try {
     genAI = new GoogleGenerativeAI(apiKey);
     isGeminiConfigured = true;
-    console.log("GymChief AI: Gemini API configured successfully");
+    console.log("GymChef AI: Gemini API configured successfully");
   } catch (error) {
-    console.error("GymChief AI: Failed to configure Gemini API:", error);
+    console.error("GymChef AI: Failed to configure Gemini API:", error);
   }
 } else {
-  console.warn("GymChief AI: Gemini API key is missing. Using offline AI simulation engine.");
+  console.warn("GymChef AI: Gemini API key is missing. Using offline AI simulation engine.");
 }
 
 const COACH_SYSTEM_PROMPT = `
-You are "GymChief AI", a premium, expert, and highly encouraging gym nutrition coach.
+You are "GymChef AI", a premium, expert, and highly encouraging gym nutrition coach.
 Your goal is to guide users to build muscle, lose fat, and maintain healthy lifestyles.
 Keep answers concise, direct, and focused on high-protein nutrition, macros, and fitness habits.
 Always respond in Markdown. If recommending a recipe, structure it clearly with:
@@ -49,7 +49,7 @@ export async function askCoach(message, history = []) {
       // Format history for Gemini chat API
       const contents = [
         { role: "user", parts: [{ text: COACH_SYSTEM_PROMPT }] },
-        { role: "model", parts: [{ text: "Understood. I am GymChief AI, your nutrition coach. How can I help you crush your fitness goals today?" }] }
+        { role: "model", parts: [{ text: "Understood. I am GymChef AI, your nutrition coach. How can I help you crush your fitness goals today?" }] }
       ];
 
       // Add actual chat history
@@ -255,7 +255,7 @@ To lose body fat while retaining hard-earned muscle tissue:
 *Try loading up on **Citrus Baked Salmon** or a **Greek Yogurt Berry Bowl** to satisfy sweet cravings while packing 30g+ of protein.*`;
   }
 
-  return `### 💪 GymChief AI Coach Active
+  return `### 💪 GymChef AI Coach Active
 
 Hey! I'm your AI Nutrition Assistant. I can help you with:
 - **High-protein recipes** based on ingredients you have.

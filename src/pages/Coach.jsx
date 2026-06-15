@@ -371,7 +371,7 @@ export default function Coach() {
               <Bot className="h-5 w-5 text-[#00a699]" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-slate-900">GymChief AI</h3>
+              <h3 className="text-sm font-bold text-slate-900">GymChef AI</h3>
               <p className="text-[11px] text-[#00a699] flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#00a699] inline-block animate-pulse" />
                 Online
